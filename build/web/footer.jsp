@@ -9,8 +9,9 @@
     <div class="container">
         <div class="footer-content">
             <div class="footer-column">
-                <p>Được ra đời từ năm 2010, trải qua hơn 7 năm hoạt động, giờ đây S.Silee Store đã trở thành một hệ thống thời trang và xây dựng được chất riêng của mình.</p>
-                <p>Thành phố Hồ Chí Minh</p>
+                <p>Trần Nam Khánh - 22103100056</p>
+                <p>Bùi Đức Nam - 22103100039</p>
+                <p>Phạm Văn  - 22103100057</p>
                 <p>thoitrang03@gmail.com</p>
                 <p>0123456789</p>
                 <p>Facebook</p>
@@ -18,11 +19,11 @@
             <div class="footer-column">
                 <h4>VỀ CHÚNG TÔI</h4>
                 <ul>
-                    <li><a href="#">Trang chủ</a></li>
-                    <li><a href="#">Giới thiệu</a></li>
-                    <li><a href="#">Sản phẩm</a></li>
-                    <li><a href="#">Tin tức</a></li>
-                    <li><a href="#">Liên hệ</a></li>
+                    <li><a href="home" class="${activePage == 'home' ? 'active' : ''}">Trang chủ</a></li>
+                    <li><a href="about" class="${activePage == 'about' ? 'active' : ''}">Giới thiệu</a></li>
+                    <li class="has-dropdown"><a href="products" class="${activePage == 'products' ? 'active' : ''}">Sản phẩm</a></li>
+                    <li><a href="news" class="${activePage == 'news' ? 'active' : ''}">Tin tức</a></li>
+                    <li><a href="contact" class="${activePage == 'stores' ? 'active' : ''}">Liên hệ & hệ thống cửa hàng</a></li>
                 </ul>
             </div>
             <div class="footer-column">
@@ -43,10 +44,23 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>© Bản quyền thuộc về Thời Trang | Thiết kế bởi WebDemo</p>
+            <p>© Bản quyền thuộc về Thời Trang | Thiết kế bởi Nhom3</p>
         </div>
     </div>
     <a href="#" class="scroll-to-top"><i class="fa-solid fa-arrow-up"></i></a>
 </footer>
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/690390a9d8bd2d195501a167/1j8quq5it';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
 </body>
 </html>

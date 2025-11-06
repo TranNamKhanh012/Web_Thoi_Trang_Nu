@@ -287,4 +287,26 @@ public User findByEmail(String email) {
         }
         return list;
     }
+    // Dán vào bên trong class UserDAO
+
+    /**
+     * Cập nhật thông tin cá nhân (không bao gồm mật khẩu, email, vai trò).
+     * @param userId ID của người dùng cần cập nhật.
+     * @param fullname Tên đầy đủ mới.
+     * @param phone SĐT mới.
+     * @param address Địa chỉ mới.
+     */
+    public void updateProfile(int userId, String fullname, String phone, String address) {
+        String query = "UPDATE users SET fullname = ?, phone_number = ?, address = ? WHERE id = ?";
+        try (Connection conn = DBContext.getConnection();
+             PreparedStatement ps = conn.prepareStatement(query)) {
+            ps.setString(1, fullname);
+            ps.setString(2, phone);
+            ps.setString(3, address);
+            ps.setInt(4, userId);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

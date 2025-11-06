@@ -49,73 +49,97 @@ public class ProductDAO {
     
     // Dán vào bên trong class ProductDAO
 
-/**
- * Lấy tất cả sản phẩm từ database.
- * @return Danh sách tất cả Product.
- */
-public List<Product> getAllProducts() {
-    List<Product> list = new ArrayList<>();
-    // Thêm subquery để tính tổng stock từ product_sizes
-    String query = "SELECT p.*, c.name as category_name, "
-                 + "(SELECT SUM(ps.stock) FROM product_sizes ps WHERE ps.product_id = p.id) as total_stock "
-                 + "FROM products p "
-                 + "LEFT JOIN categories c ON p.category_id = c.id "
-                 + "ORDER BY p.id DESC";
-    
-    try (Connection conn = DBContext.getConnection();
-         PreparedStatement ps = conn.prepareStatement(query);
-         ResultSet rs = ps.executeQuery()) {
-        
-        while (rs.next()) {
-            Product p = new Product();
-            p.setId(rs.getInt("id"));
-            p.setName(rs.getString("name"));
-            p.setOriginalPrice(rs.getDouble("original_price"));
-            p.setSalePrice(rs.getDouble("sale_price"));
-            p.setImageUrl(rs.getString("image_url"));
-            p.setSoldQuantity(rs.getInt("sold_quantity"));
-            p.setCategoryId(rs.getInt("category_id"));
-            // Lấy tổng tồn kho từ subquery và gán vào trường mới
-            p.setTotalStock(rs.getInt("total_stock"));
-            // p.setCategoryName(rs.getString("category_name")); // Nếu có
-            list.add(p);
+    /**
+     * Lấy tất cả sản phẩm từ database.
+     * @return Danh sách tất cả Product.
+     */
+    /**
+         * Lấy tất cả sản phẩm, hỗ trợ sắp xếp.
+         * @param sortBy Cột sắp xếp ("price", "date" hoặc null/trống cho mặc định).
+         * @param sortOrder Thứ tự sắp xếp ("asc", "desc" hoặc null/trống cho mặc định).
+         * @return Danh sách Product.
+         */
+        public List<Product> getAllProducts(Double minPrice, Double maxPrice, String sortBy, String sortOrder) {
+        List<Product> list = new ArrayList<>();
+        String orderByClause = buildOrderByClause(sortBy, sortOrder);
+        // Xây dựng câu WHERE động
+        StringBuilder whereClause = new StringBuilder(" WHERE 1=1 "); // Luôn đúng
+        List<Object> params = new ArrayList<>();
+        if (minPrice != null) {
+            whereClause.append(" AND (CASE WHEN p.sale_price IS NOT NULL AND p.sale_price > 0 THEN p.sale_price ELSE p.original_price END) >= ? ");
+            params.add(minPrice);
         }
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
-    return list;
-}
+        if (maxPrice != null) {
+            whereClause.append(" AND (CASE WHEN p.sale_price IS NOT NULL AND p.sale_price > 0 THEN p.sale_price ELSE p.original_price END) <= ? ");
+            params.add(maxPrice);
+        }
 
-/**
- * Lấy tất cả sản phẩm thuộc về một danh mục cụ thể.
- * @param categoryId ID của danh mục cần lọc.
- * @return Danh sách Product thuộc danh mục đó.
- */
-public List<Product> getProductsByCategoryId(int categoryId) {
-    List<Product> list = new ArrayList<>();
-    String query = "SELECT * FROM products WHERE category_id = ?";
-    
-    try (Connection conn = DBContext.getConnection();
-         PreparedStatement ps = conn.prepareStatement(query)) {
-        
-        ps.setInt(1, categoryId);
-        try (ResultSet rs = ps.executeQuery()) {
-            while (rs.next()) {
-                Product p = new Product();
-                p.setId(rs.getInt("id"));
-                p.setName(rs.getString("name"));
-                p.setOriginalPrice(rs.getDouble("original_price"));
-                p.setSalePrice(rs.getDouble("sale_price"));
-                p.setImageUrl(rs.getString("image_url"));
-                list.add(p);
+        String query = "SELECT p.*, (SELECT SUM(ps.stock) FROM product_sizes ps WHERE ps.product_id = p.id) as total_stock "
+                     + "FROM products p "
+                     + whereClause.toString() // Thêm điều kiện giá
+                     + orderByClause;
+
+        try (Connection conn = DBContext.getConnection();
+             PreparedStatement ps = conn.prepareStatement(query)) {
+             // Gán các tham số giá vào PreparedStatement
+             for (int i = 0; i < params.size(); i++) {
+                 ps.setObject(i + 1, params.get(i));
+             }
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Product p = new Product();
+                    // ... (gán giá trị như cũ) ...
+                    p.setId(rs.getInt("id")); p.setName(rs.getString("name")); p.setOriginalPrice(rs.getDouble("original_price")); p.setSalePrice(rs.getDouble("sale_price")); p.setImageUrl(rs.getString("image_url")); p.setSoldQuantity(rs.getInt("sold_quantity")); p.setCategoryId(rs.getInt("category_id"));
+                    p.setTotalStock(rs.getInt("total_stock"));
+                    list.add(p);
+                }
             }
-        }
-    } catch (Exception e) {
-        e.printStackTrace();
+        } catch (Exception e) { e.printStackTrace(); }
+        return list;
     }
-    return list;
-}
 
+    // Thay thế phương thức này trong ProductDAO.java
+    public List<Product> getProductsByCategoryId(int categoryId, Double minPrice, Double maxPrice, String sortBy, String sortOrder) {
+        List<Product> list = new ArrayList<>();
+        String orderByClause = buildOrderByClause(sortBy, sortOrder);
+        // Xây dựng câu WHERE động
+        StringBuilder whereClause = new StringBuilder(" WHERE p.category_id = ? ");
+        List<Object> params = new ArrayList<>();
+        params.add(categoryId); // Tham số đầu tiên luôn là categoryId
+        if (minPrice != null) {
+            whereClause.append(" AND (CASE WHEN p.sale_price IS NOT NULL AND p.sale_price > 0 THEN p.sale_price ELSE p.original_price END) >= ? ");
+            params.add(minPrice);
+        }
+        if (maxPrice != null) {
+            whereClause.append(" AND (CASE WHEN p.sale_price IS NOT NULL AND p.sale_price > 0 THEN p.sale_price ELSE p.original_price END) <= ? ");
+            params.add(maxPrice);
+        }
+
+        String query = "SELECT p.*, (SELECT SUM(ps.stock) FROM product_sizes ps WHERE ps.product_id = p.id) as total_stock "
+                     + "FROM products p "
+                     + whereClause.toString() // Thêm điều kiện category và giá
+                     + orderByClause;
+
+        try (Connection conn = DBContext.getConnection();
+             PreparedStatement ps = conn.prepareStatement(query)) {
+            // Gán các tham số vào PreparedStatement
+            for (int i = 0; i < params.size(); i++) {
+                ps.setObject(i + 1, params.get(i));
+            }
+
+            try (ResultSet rs = ps.executeQuery()) {
+                 while (rs.next()) {
+                    Product p = new Product();
+                    // ... (gán giá trị như cũ) ...
+                     p.setId(rs.getInt("id")); p.setName(rs.getString("name")); p.setOriginalPrice(rs.getDouble("original_price")); p.setSalePrice(rs.getDouble("sale_price")); p.setImageUrl(rs.getString("image_url")); p.setSoldQuantity(rs.getInt("sold_quantity")); p.setCategoryId(rs.getInt("category_id"));
+                    p.setTotalStock(rs.getInt("total_stock"));
+                    list.add(p);
+                }
+            }
+        } catch (Exception e) { e.printStackTrace(); }
+        return list;
+    }
 // Dán vào bên trong class ProductDAO
 
 /**
@@ -462,37 +486,59 @@ public List<Product> getProductsByCategoryId(int categoryId) {
     // Dán vào bên trong class ProductDAO.java
 
 /**
- * Lấy danh sách các sản phẩm đang được giảm giá.
- * Giảm giá khi sale_price > 0 VÀ sale_price < original_price.
- * @return Danh sách Product đang giảm giá, sắp xếp theo ID mới nhất.
- */
-public List<Product> getOnSaleProducts() {
-    List<Product> list = new ArrayList<>();
-    String query = "SELECT p.*, "
-                 + "(SELECT SUM(ps.stock) FROM product_sizes ps WHERE ps.product_id = p.id) as total_stock " // Lấy tổng tồn kho
-                 + "FROM products p "
-                 + "WHERE p.sale_price IS NOT NULL AND p.sale_price > 0 AND p.sale_price < p.original_price "
-                 + "ORDER BY p.id DESC"; // Sắp xếp theo ID mới nhất
+     * Lấy sản phẩm đang giảm giá, hỗ trợ sắp xếp.
+     * @param sortBy Cột sắp xếp.
+     * @param sortOrder Thứ tự sắp xếp.
+     * @return Danh sách Product.
+     */
+    public List<Product> getOnSaleProducts(String sortBy, String sortOrder) {
+        List<Product> list = new ArrayList<>();
+        String orderByClause = buildOrderByClause(sortBy, sortOrder);
+        String query = "SELECT p.*, (SELECT SUM(ps.stock) FROM product_sizes ps WHERE ps.product_id = p.id) as total_stock "
+                     + "FROM products p "
+                     + "WHERE p.sale_price IS NOT NULL AND p.sale_price > 0 AND p.sale_price < p.original_price "
+                     + orderByClause;
 
-    try (Connection conn = DBContext.getConnection();
-         PreparedStatement ps = conn.prepareStatement(query);
-         ResultSet rs = ps.executeQuery()) {
-
-        while (rs.next()) {
-            Product p = new Product();
-            p.setId(rs.getInt("id"));
-            p.setName(rs.getString("name"));
-            p.setOriginalPrice(rs.getDouble("original_price"));
-            p.setSalePrice(rs.getDouble("sale_price"));
-            p.setImageUrl(rs.getString("image_url"));
-            p.setSoldQuantity(rs.getInt("sold_quantity"));
-            p.setCategoryId(rs.getInt("category_id"));
-            p.setTotalStock(rs.getInt("total_stock")); // Lấy tổng tồn kho
-            list.add(p);
+        try (Connection conn = DBContext.getConnection();
+             PreparedStatement ps = conn.prepareStatement(query);
+             ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                Product p = new Product();
+                p.setId(rs.getInt("id"));
+                p.setName(rs.getString("name"));
+                p.setOriginalPrice(rs.getDouble("original_price"));
+                p.setSalePrice(rs.getDouble("sale_price"));
+                p.setImageUrl(rs.getString("image_url"));
+                p.setSoldQuantity(rs.getInt("sold_quantity"));
+                p.setCategoryId(rs.getInt("category_id"));
+                p.setTotalStock(rs.getInt("total_stock"));
+                list.add(p);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-    } catch (Exception e) {
-        e.printStackTrace();
+        return list;
     }
-    return list;
-}
+    // *** THÊM HÀM TRỢ GIÚP NÀY VÀO CUỐI CLASS ProductDAO ***
+    /**
+     * Hàm nội bộ để tạo mệnh đề ORDER BY dựa trên tham số.
+     * @param sortBy Cột muốn sắp xếp ("price", "date", null).
+     * @param sortOrder Thứ tự ("asc", "desc", null).
+     * @return Chuỗi ORDER BY tương ứng (ví dụ: " ORDER BY p.created_date DESC").
+     */
+    // Thay thế hàm này trong ProductDAO.java
+    private String buildOrderByClause(String sortBy, String sortOrder) {
+        String column = "p.created_date"; // Mặc định sắp xếp theo ngày tạo (mới nhất)
+        if ("price".equalsIgnoreCase(sortBy)) {
+            column = "CASE WHEN p.sale_price IS NOT NULL AND p.sale_price > 0 THEN p.sale_price ELSE p.original_price END";
+        }
+        // Không cần trường hợp "date" vì nó là mặc định
+
+        String order = "DESC"; // Mặc định giảm dần (mới nhất/giá cao nhất)
+        if ("asc".equalsIgnoreCase(sortOrder)) {
+            order = "ASC"; // Tăng dần (cũ nhất/giá thấp nhất)
+        }
+
+        return " ORDER BY " + column + " " + order;
+    }
 }

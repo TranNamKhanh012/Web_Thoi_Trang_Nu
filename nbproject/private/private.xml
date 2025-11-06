@@ -17,6 +17,7 @@
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/search.jsp</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/AdminFeedbackController.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/ArticleDetailController.java</file>
+            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/ProfileController.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/entity/Cart.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/admin/user_form.jsp</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/AdminProductController.java</file>
@@ -39,11 +40,13 @@
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/admin/product_form.jsp</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/article-detail.jsp</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/dao/FeedbackDAO.java</file>
+            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/vnpay_return.jsp</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/login.jsp</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/admin/user_list.jsp</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/admin/article_form.jsp</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/checkout.jsp</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/OrderHistoryController.java</file>
+            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/context/VNPayConfig.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/CheckoutController.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/LoginController.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/AdminArticleController.java</file>
@@ -53,11 +56,13 @@
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/DetailController.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/NewsController.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/reset-password.jsp</file>
+            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/profile.jsp</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/admin/admin_dashboard.jsp</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/admin/feedback_list.jsp</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/CartController.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/dao/CategoryDAO.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/css/style.css</file>
+            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/ConfirmOrderController.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/AboutController.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/AdminCategoryController.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/HomeController.java</file>
@@ -65,6 +70,7 @@
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/forgot-password.jsp</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/AdminOrderController.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/entity/Article.java</file>
+            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/VNPayIPNController.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/entity/CartItem.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/entity/Category.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/entity/Order.java</file>

@@ -47,10 +47,10 @@
             <div class="contact-header">
                 <h2>Bản đồ & thông tin Liên hệ</h2>
                 <p>
-                    <strong>CÔNG TY TNHH THƯƠNG MẠI MUA SẮM TRỰC TUYẾN LARVA STORE</strong><br>
-                    Kho hàng: Khu đất dịch vụ Thôn Lũng 9, Lai Xá, Kim Chung, Hoài Đức, Hà Nội<br>
+                    <strong>CÔNG TY TNHH THƯƠNG MẠI MUA SẮM TRỰC TUYẾN SHOP FASHION</strong><br>
+                    Kho hàng: 123 Tân Mai - Hoàng Mai - Hà Nội<br>
                     Hotline: 0976 345 080 - 0972 901 560 - 0976 345 030<br>
-                    Email: sales.giadungonline@gmail.com
+                    Email: sales.thoitrangonline@gmail.com
                 </p>
             </div>
             

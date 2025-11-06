@@ -156,7 +156,8 @@ public class AdminProductController extends HttpServlet {
                     productList = productDAO.searchProductsAdmin(keyword.trim()); // Gọi hàm tìm kiếm mới
                     request.setAttribute("searchKeyword", keyword);
                 } else {
-                    productList = productDAO.getAllProducts();
+                    // Khi hiển thị danh sách mặc định (trong switch case hoặc phần else cuối)
+                    productList = productDAO.getAllProducts(null, null, null, null);
                 }
                 request.setAttribute("productList", productList);
                 break; // Thoát switch, để forward
@@ -168,7 +169,8 @@ public class AdminProductController extends HttpServlet {
             productList = productDAO.searchProductsAdmin(keyword.trim());
             request.setAttribute("searchKeyword", keyword);
         } else {
-            productList = productDAO.getAllProducts();
+            // Khi hiển thị danh sách mặc định (trong switch case hoặc phần else cuối)
+            productList = productDAO.getAllProducts(null, null, null, null);
         }
         request.setAttribute("productList", productList);
     }

@@ -63,7 +63,7 @@
                     <c:choose>
                         <%-- TRƯỜNG HỢP 1: NẾU ĐÃ ĐĂNG NHẬP (${sessionScope.acc != null}) --%>
                         <c:when test="${sessionScope.acc != null}">
-                            <a href="#">XIN CHÀO, ${sessionScope.acc.fullname}</a>
+                            <a href="${pageContext.request.contextPath}/profile">XIN CHÀO, ${sessionScope.acc.fullname}</a>
                             <a href="logout">ĐĂNG XUẤT</a>
                         </c:when>
 
@@ -99,7 +99,7 @@
         <div class="header-main">
             <div class="container">
                 <a href="#" class="logo">
-                    Big discount.
+                    Shop fashion.
                 </a>
                 <nav class="main-nav">
                     <ul>
@@ -107,11 +107,7 @@
 
                         <li><a href="about" class="${activePage == 'about' ? 'active' : ''}">GIỚI THIỆU</a></li>
 
-                        <li class="has-dropdown">
-                            <a href="products" class="${activePage == 'products' ? 'active' : ''}">
-                                SẢN PHẨM </a>
-                            
-                        </li>
+                        <li class="has-dropdown"><a href="products" class="${activePage == 'products' ? 'active' : ''}">SẢN PHẨM </a></li>
 
                         <li><a href="news" class="${activePage == 'news' ? 'active' : ''}">TIN TỨC</a></li>
 

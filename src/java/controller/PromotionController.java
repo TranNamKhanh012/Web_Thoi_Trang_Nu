@@ -19,18 +19,21 @@ public class PromotionController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
+        String sortBy = request.getParameter("sort");
+        String sortOrder = request.getParameter("order");
+    
         ProductDAO productDAO = new ProductDAO();
         CategoryDAO categoryDAO = new CategoryDAO();
 
         // Lấy danh sách sản phẩm giảm giá
-        List<Product> saleProductList = productDAO.getOnSaleProducts();
-
-        // Lấy danh mục cho header
+        List<Product> saleProductList = productDAO.getOnSaleProducts(sortBy, sortOrder);
         List<Category> categoryList = categoryDAO.getAllCategories();
 
         // Gửi dữ liệu sang JSP
         request.setAttribute("saleProductList", saleProductList);
         request.setAttribute("categoryList", categoryList);
+        request.setAttribute("currentSort", sortBy); // Gửi lựa chọn sort
+        request.setAttribute("currentOrder", sortOrder); // Gửi lựa chọn order
         request.setAttribute("activePage", "promo"); // Đánh dấu trang active
 
         request.getRequestDispatcher("promotions.jsp").forward(request, response);
