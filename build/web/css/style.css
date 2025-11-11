@@ -182,20 +182,16 @@ footer {
     background-color: #007bff;
 }
 /* --- Banner --- */
-/* --- Banner --- */
 .banner {
     /* Đẩy banner xuống để không bị header che */
     margin-top: 130px; /* <<== DÒNG QUAN TRỌNG NHẤT */
-
     position: relative;
-    height: 700px;
-    background-image: url('../images/banner4.jpg'); 
+    height: 700px; 
     background-size: cover;
     background-position: center;
     display: flex;
     align-items: center;
 }
-
 .banner-content {
     /* Lớp container này không cần thiết vì banner-content đã có thể tự căn lề */
     padding-left: 150px; /* Đẩy chữ "Fashion" vào một chút từ lề trái */

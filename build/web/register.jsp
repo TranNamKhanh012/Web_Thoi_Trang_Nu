@@ -23,7 +23,7 @@
         <div class="container">
             <div class="auth-form">
                 <h2>ĐĂNG KÝ</h2>
-                <p class="login-link">Đã có tài khoản, đăng nhập <a href="login">tại đây</a></p>
+    
                 <c:if test="${not empty error}">
                     <p class="error-message">${error}</p>
                 </c:if>

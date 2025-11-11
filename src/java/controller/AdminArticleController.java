@@ -61,7 +61,9 @@ public class AdminArticleController extends HttpServlet {
                     String imageUrl = request.getParameter("imageUrl");
                     
                     if (title != null && !title.trim().isEmpty() && content != null && !content.trim().isEmpty()) {
-                        if (id == -1) { // Thêm mới
+                        if (id == -1) {
+                            // Thêm mới
+                            System.out.println("DEBUG: Đang lưu bài viết mới với author_id = " + adminUser.getId());
                              articleDAO.addArticle(title.trim(), content.trim(), imageUrl, adminUser.getId());
                         } else { // Cập nhật
                              articleDAO.updateArticle(id, title.trim(), content.trim(), imageUrl);

@@ -246,5 +246,32 @@ public double calculateRevenueThisMonth() {
         }
         return orderList;
     }
-   
+    public Order getOrderByIdAndUser(int orderId, int userId) {
+     Order order = null;
+     String query = "SELECT * FROM orders WHERE id = ? AND user_id = ?";
+     try (Connection conn = DBContext.getConnection();
+          PreparedStatement ps = conn.prepareStatement(query)) {
+
+         ps.setInt(1, orderId);
+         ps.setInt(2, userId);
+
+         try (ResultSet rs = ps.executeQuery()) {
+             if (rs.next()) {
+                 order = new Order();
+                 order.setId(rs.getInt("id"));
+                 order.setUserId(rs.getInt("user_id"));
+                 order.setOrderDate(rs.getTimestamp("order_date"));
+                 order.setTotalMoney(rs.getDouble("total_money"));
+                 order.setShippingAddress(rs.getString("shipping_address"));
+                 order.setStatus(rs.getString("status"));
+
+                 // Lấy chi tiết các sản phẩm trong đơn hàng này
+                 order.setDetails(getOrderDetailsByOrderId(order.getId()));
+             }
+         }
+     } catch (Exception e) {
+         e.printStackTrace();
+     }
+     return order;
+ }
 }

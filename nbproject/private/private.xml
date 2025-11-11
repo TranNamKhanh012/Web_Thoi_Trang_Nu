@@ -7,7 +7,6 @@
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/dao/ProductSizeDAO.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/entity/OrderDetail.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/ForgotPasswordController.java</file>
-            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/ResetPasswordController.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/dao/ProductDAO.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/cart.jsp</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/promotions.jsp</file>
@@ -68,6 +67,7 @@
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/HomeController.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/AdminUserController.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/forgot-password.jsp</file>
+            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/InvoiceController.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/AdminOrderController.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/entity/Article.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/VNPayIPNController.java</file>

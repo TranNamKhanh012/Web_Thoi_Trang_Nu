@@ -7,7 +7,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${empty product.id ? 'Thêm' : 'Sửa'} Sản phẩm</title>
+    <%-- SỬA LỖI: Kiểm tra id > 0 thay vì 'empty' --%>
+    <title>${product.id > 0 ? 'Sửa' : 'Thêm'} Sản phẩm</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
     <link rel="stylesheet" href="../css/admin_style.css" type="text/css"/>
     <style>
@@ -56,19 +57,24 @@
 
         <%-- MAIN CONTENT --%>
         <main class="admin-main-content">
-             <header class="admin-header"><h1>${empty product.id ? 'Thêm Sản phẩm mới' : 'Chỉnh sửa Sản phẩm'}</h1></header>
+            <%-- SỬA LỖI: Kiểm tra id > 0 --%>
+             <header class="admin-header"><h1>${product.id > 0 ? 'Chỉnh sửa Sản phẩm' : 'Thêm Sản phẩm mới'}</h1></header>
 
             <div class="form-section">
-                <%-- Hiển thị lỗi nếu có --%>
-                 <c:if test="${not empty sessionScope.adminErrorMsg}">
+                <%-- Hiển thị lỗi từ request (nếu có) --%>
+                <c:if test="${not empty formError}">
+                    <p class="form-error">${formError}</p>
+                </c:if>
+                <%-- Giữ lại thông báo lỗi từ session (nếu có) --%>
+                <c:if test="${not empty sessionScope.adminErrorMsg}">
                     <p class="form-error">${sessionScope.adminErrorMsg}</p>
                     <c:remove var="adminErrorMsg" scope="session"/>
                 </c:if>
 
                 <form id="product-form" action="products" method="POST">
                     <input type="hidden" name="action" value="save">
-                    <%-- Gửi ID đi nếu là đang sửa --%>
-                    <c:if test="${not empty product.id}">
+                    <%-- SỬA LỖI: Chỉ gửi 'pid' nếu id > 0 (là form Sửa) --%>
+                    <c:if test="${product.id > 0}">
                         <input type="hidden" name="pid" value="${product.id}">
                     </c:if>
 
@@ -88,15 +94,14 @@
                         </div>
                         <div class="form-group">
                             <label for="originalPrice">Giá gốc *</label>
-                            <input type="number" id="originalPrice" name="originalPrice" value="${product.originalPrice}" required step="1000" min="0">
+                            <input type="number" id="originalPrice" name="originalPrice" value="${product.originalPrice > 0 ? product.originalPrice : 0}" required step="1000" min="0">
                         </div>
                          <div class="form-group">
-                            <label for="salePrice">Giá bán (Để 0 nếu bằng giá gốc)</label>
-                            <%-- Hiển thị giá trị 0 nếu nó là 0 --%>
-                            <input type="number" id="salePrice" name="salePrice" value="${product.salePrice != 0 ? product.salePrice : '0'}" step="1000" min="0">
+                            <label for="salePrice">Giá bán (Nhập 0 nếu không giảm)</label>
+                            <input type="number" id="salePrice" name="salePrice" value="${product.salePrice > 0 ? product.salePrice : 0}" step="1000" min="0">
                         </div>
                          <div class="form-group full-width">
-                            <label for="imageUrl">URL Ảnh *</label>
+                            <label for="imageUrl">URL Ảnh * (Vd: images/tenanh.jpg)</label>
                             <input type="text" id="imageUrl" name="imageUrl" value="${product.imageUrl}" required>
                         </div>
                         <div class="form-group full-width">
@@ -106,30 +111,30 @@
 
                         <%-- Phần quản lý Size và Stock --%>
                         <div class="form-group full-width size-stock-section">
-                            <h4>Kích thước và Số lượng tồn kho *</h4>
+                            <h4>Kích thước và Số lượng trong kho *</h4>
                             <div id="size-stock-container">
-                                <c:forEach items="${productSizes}" var="psize" varStatus="loop">
-                                    <div class="size-stock-row">
-                                        <input type="text" name="size[]" placeholder="Size (VD: S, M)" value="${psize.size}" required>
-                                        <input type="number" name="stock[]" placeholder="Số lượng" value="${psize.stock}" required min="0">
-                                        <%-- Chỉ hiển thị nút xóa nếu không phải hàng đầu tiên --%>
-                                        <button type="button" class="btn-remove-size" onclick="removeSizeRow(this)" ${loop.index == 0 ? 'style="visibility:hidden;"' : ''}>Xóa</button>
-                                    </div>
-                                </c:forEach>
-                                <%-- Luôn có ít nhất 1 hàng, kể cả khi thêm mới --%>
+                                <%-- Hiển thị productSizes nếu có (cho form Sửa hoặc form Thêm bị lỗi) --%>
+                                <c:if test="${not empty productSizes}">
+                                    <c:forEach items="${productSizes}" var="psize" varStatus="loop">
+                                        <div class="size-stock-row">
+                                            <input type="text" name="size[]" placeholder="Size (VD: S, M)" value="${psize.size}" required>
+                                            <input type="number" name="stock[]" placeholder="Số lượng" value="${psize.stock}" required min="0">
+                                            <button type="button" class="btn-remove-size" onclick="removeSizeRow(this)" ${loop.index == 0 ? 'style="visibility:hidden;"' : ''}>Xóa</button>
+                                        </div>
+                                    </c:forEach>
+                                </c:if>
+                                <%-- Luôn có ít nhất 1 hàng, kể cả khi thêm mới (và productSizes rỗng) --%>
                                 <c:if test="${empty productSizes}">
                                      <div class="size-stock-row">
                                         <input type="text" name="size[]" placeholder="Size (VD: S, M)" value="" required>
                                         <input type="number" name="stock[]" placeholder="Số lượng" value="0" required min="0">
-                                         <%-- Ẩn nút xóa ở hàng đầu tiên --%>
                                         <button type="button" class="btn-remove-size" onclick="removeSizeRow(this)" style="visibility:hidden;">Xóa</button>
                                     </div>
                                 </c:if>
                             </div>
                             <button type="button" class="btn-add-size" onclick="addSizeRow()">+ Thêm Size</button>
                         </div>
-
-                    </div> <%-- Kết thúc form-grid --%>
+                    </div> 
 
                     <div style="margin-top: 20px;">
                         <button type="submit" class="btn-submit btn-save">Lưu Sản phẩm</button>
@@ -138,7 +143,7 @@
                 </form>
             </div>
 
-             <%-- JavaScript cho việc thêm/xóa dòng size --%>
+             <%-- JavaScript validation (Đã sửa ở lần trước, giữ nguyên) --%>
              <script>
                  function addSizeRow() {
                      const container = document.getElementById('size-stock-container');
@@ -154,7 +159,6 @@
 
                  function removeSizeRow(button) {
                      const row = button.parentElement;
-                     // Không xóa hàng cuối cùng
                      if (document.querySelectorAll('.size-stock-row').length > 1) {
                         row.remove();
                      } else {
@@ -162,18 +166,42 @@
                      }
                  }
                  
-                 // Validate form trước khi submit (đảm bảo có ít nhất 1 size)
                  document.getElementById('product-form').addEventListener('submit', function(event) {
-                     const sizeInputs = document.querySelectorAll('input[name="size[]"]');
-                     let hasValidSize = false;
-                     sizeInputs.forEach(input => {
-                         if (input.value.trim() !== '') {
-                             hasValidSize = true;
-                         }
-                     });
-                     if (!hasValidSize) {
+                     const sizeRows = document.querySelectorAll('.size-stock-row');
+                     if (sizeRows.length === 0) {
                          alert('Vui lòng nhập ít nhất một size cho sản phẩm.');
-                         event.preventDefault(); // Ngăn form gửi đi
+                         event.preventDefault(); 
+                         return;
+                     }
+                     let hasValidRow = false;
+                     let validationError = "";
+                     for (const row of sizeRows) {
+                         const sizeInput = row.querySelector('input[name="size[]"]');
+                         const stockInput = row.querySelector('input[name="stock[]"]');
+                         const size = sizeInput.value.trim();
+                         const stock = stockInput.value.trim();
+                         if (size !== '' && stock !== '') {
+                             hasValidRow = true;
+                             if (parseInt(stock) < 0) {
+                                  validationError = "Số lượng không được âm.";
+                                  break;
+                             }
+                         } 
+                         else if (size !== '' && stock === '') {
+                             validationError = "Bạn đã nhập size '" + size + "' nhưng quên nhập số lượng.";
+                             break;
+                         } 
+                         else if (size === '' && stock !== '' && stock !== '0') {
+                             validationError = "Bạn đã nhập số lượng '" + stock + "' nhưng quên nhập size.";
+                             break;
+                         }
+                     }
+                     if (validationError) {
+                          alert(validationError);
+                          event.preventDefault();
+                     } else if (!hasValidRow) {
+                         alert('Vui lòng nhập ít nhất một cặp Size/Số lượng hợp lệ.');
+                         event.preventDefault(); 
                      }
                  });
              </script>

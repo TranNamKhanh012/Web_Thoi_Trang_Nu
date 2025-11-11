@@ -11,7 +11,7 @@
             <div class="footer-column">
                 <p>Trần Nam Khánh - 22103100056</p>
                 <p>Bùi Đức Nam - 22103100039</p>
-                <p>Phạm Văn  - 22103100057</p>
+                <p>Phạm Văn Quyết - 22103100057</p>
                 <p>thoitrang03@gmail.com</p>
                 <p>0123456789</p>
                 <p>Facebook</p>

@@ -98,7 +98,7 @@
 
         <div class="header-main">
             <div class="container">
-                <a href="#" class="logo">
+                <a href="home" class="logo">
                     Shop fashion.
                 </a>
                 <nav class="main-nav">

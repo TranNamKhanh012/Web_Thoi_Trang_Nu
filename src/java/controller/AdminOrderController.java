@@ -47,6 +47,7 @@ public class AdminOrderController extends HttpServlet {
         // Mặc định: Hiển thị danh sách đơn hàng
         List<Order> orderList = orderDAO.getAllOrders();
         request.setAttribute("orderList", orderList);
+        request.setAttribute("activePage", "orders");
         request.getRequestDispatcher("order_list.jsp").forward(request, response);
     }
 
