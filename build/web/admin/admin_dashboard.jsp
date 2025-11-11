@@ -17,6 +17,8 @@
         <style>
             /* --- Cài đặt chung & Reset --- */
             * {
+                margin: 0;
+                padding: 0;
                 box-sizing: border-box;
             }
             body {
