@@ -33,6 +33,13 @@
         .form-message { padding: 10px; margin-bottom: 15px; border-radius: 4px; text-align: center; font-weight: bold;}
         .form-error { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
         .form-success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        
+        /* === CSS CHO THÔNG BÁO ĐĂNG NHẬP === */
+        .login-prompt { padding: 30px; background: #f4f4f4; border: 1px solid #ddd; text-align: center; border-radius: 4px; }
+        .login-prompt h3 { margin-top: 0; }
+        .login-prompt p { margin-bottom: 20px; }
+        .login-prompt .btn-submit { display: inline-block; width: auto; text-decoration: none; }
+        
     </style>
 </head>
 <body>
@@ -60,7 +67,7 @@
                 </iframe>
             </div>
 
-            <%-- === FORM LIÊN HỆ === --%>
+            <%-- === FORM LIÊN HỆ (ĐÃ SỬA) === --%>
             <div class="contact-form-section">
                 <h3>Gửi phản hồi cho chúng tôi</h3>
 
@@ -68,25 +75,36 @@
                 <c:if test="${not empty errorMsg}"> <p class="form-message form-error">${errorMsg}</p> </c:if>
                 <c:if test="${not empty successMsg}"> <p class="form-message form-success">${successMsg}</p> </c:if>
 
-                <form action="contact" method="POST">
-                    <div class="form-group">
-                        <label for="name">Họ và Tên *</label>
-                        <input type="text" id="name" name="name" value="${oldName}" required>
+                <%-- KIỂM TRA ĐĂNG NHẬP --%>
+                <c:if test="${sessionScope.acc == null}">
+                    <div class="login-prompt">
+                        <h3>Vui lòng đăng nhập để gửi phản hồi.</h3>
+                        <p>Việc này giúp chúng tôi biết chính xác ai đã gửi phản hồi để có thể hỗ trợ bạn tốt nhất.</p>
+                        <a href="login" class="btn-submit">
+                            Đến trang Đăng nhập
+                        </a>
                     </div>
-                    <div class="form-group">
-                        <label for="email">Email *</label>
-                        <input type="email" id="email" name="email" value="${oldEmail}" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="subject">Chủ đề</label>
-                        <input type="text" id="subject" name="subject" value="${oldSubject}">
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Nội dung *</label>
-                        <textarea id="message" name="message" required>${oldMessage}</textarea>
-                    </div>
-                    <button type="submit" class="btn-submit">Gửi tin nhắn</button>
-                </form>
+                </c:if>
+
+                <c:if test="${sessionScope.acc != null}">
+                    <p style="text-align: center; font-size: 16px;">
+                        Bạn đang gửi phản hồi với tư cách: <strong>${sessionScope.acc.fullname}</strong> (${sessionScope.acc.email})
+                    </p>
+                    
+                    <form action="contact" method="POST">
+                        <%-- Đã xóa ô Họ Tên và Email --%>
+                        
+                        <div class="form-group">
+                            <label for="subject">Chủ đề</label>
+                            <input type="text" id="subject" name="subject" value="${oldSubject}">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Nội dung *</label>
+                            <textarea id="message" name="message" required>${oldMessage}</textarea>
+                        </div>
+                        <button type="submit" class="btn-submit">Gửi tin nhắn</button>
+                    </form>
+                </c:if>
             </div>
             
         </div>

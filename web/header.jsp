@@ -51,7 +51,7 @@
         <div class="header-top">
             <div class="container">
                 <div class="contact-info">
-                    <span><i class="fa-solid fa-phone"></i> HOTLINE: 0123456789</span>
+                    <span><i class="fa-solid fa-phone"></i> HOTLINE: 0941655JQK</span>
                     <span><i class="fa-solid fa-store"></i> HỆ THỐNG CỬA HÀNG</span>
                 </div>
                 <%-- Sửa thanh tìm kiếm thành 1 form, gửi bằng POST để hỗ trợ Tiếng Việt --%>
@@ -111,7 +111,7 @@
 
                         <li><a href="news" class="${activePage == 'news' ? 'active' : ''}">TIN TỨC</a></li>
 
-                        <li><a href="contact" class="${activePage == 'stores' ? 'active' : ''}">LIÊN HỆ & HỆ THỐNG CỬA HÀNG</a></li>
+                        <li><a href="contact" class="${activePage == 'contact' ? 'active' : ''}">LIÊN HỆ & HỆ THỐNG CỬA HÀNG</a></li>
 
                         <li><a href="${pageContext.request.contextPath}/promotions" class="${activePage == 'promo' ? 'active' : ''}"><i class="fa-solid fa-tag"></i> KHUYẾN MÃI</a></li>
                     </ul>

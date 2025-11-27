@@ -12,7 +12,6 @@
         <style>
             .page-container {
                 margin-top: 135px;
-                background: #f9f9f9;
                 padding: 40px 0 80px 0;
             }
             .page-container .container {

@@ -12,7 +12,7 @@
     <style>
         .page-container {
             margin-top: 135px;
-            background-color: #fff;
+            background: #f9f9f9;
             padding: 40px 0 80px 0; /* Thêm padding dưới */
         }
         .page-container .container {

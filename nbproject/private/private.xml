@@ -4,6 +4,7 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/admin/order_list.jsp</file>
+            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/policy/payment-policy.jsp</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/dao/ProductSizeDAO.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/entity/OrderDetail.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/ForgotPasswordController.java</file>
@@ -35,11 +36,13 @@
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/header.jsp</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/products.jsp</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/dao/CartDAO.java</file>
+            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/admin/order_detail.jsp</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/entity/ProductSize.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/admin/product_form.jsp</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/article-detail.jsp</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/dao/FeedbackDAO.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/vnpay_return.jsp</file>
+            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/policy/return-policy.jsp</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/login.jsp</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/admin/user_list.jsp</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/admin/article_form.jsp</file>
@@ -56,6 +59,7 @@
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/NewsController.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/reset-password.jsp</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/profile.jsp</file>
+            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/policy/shipping-policy.jsp</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/admin/admin_dashboard.jsp</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/admin/feedback_list.jsp</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/CartController.java</file>
@@ -68,6 +72,7 @@
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/AdminUserController.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/forgot-password.jsp</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/InvoiceController.java</file>
+            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/PolicyController.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/AdminOrderController.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/entity/Article.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/VNPayIPNController.java</file>
@@ -81,6 +86,7 @@
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/AdminDashboardController.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/dao/OrderDAO.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/PromotionController.java</file>
+            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/policy/partner-policy.jsp</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/RegisterController.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/about.jsp</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/news.jsp</file>

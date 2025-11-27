@@ -77,7 +77,8 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
     String vnp_BankCode = ""; // Để trống để khách chọn ngân hàng
     
     // Tổng số tiền (VNPay yêu cầu * 100 và bỏ phần thập phân)
-    long amount = (long) cart.getTotalMoney() * 100;
+    // THAY ĐỔI: Lấy tổng tiền cuối cùng SAU KHI GIẢM GIÁ
+    long amount = (long) cart.getFinalTotal() * 100;
     
     Map<String, String> vnp_Params = new HashMap<>();
     vnp_Params.put("vnp_Version", "2.1.0");

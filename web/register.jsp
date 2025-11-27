@@ -35,10 +35,10 @@
                         <input type="text" name="ten" placeholder="Tên" required>
                     </div>
                     <div class="form-group">
-                        <input type="email" name="email" placeholder="Email" required>
+                        <input type="email" name="email" placeholder="Email" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" title="Vui lòng nhập địa chỉ email hợp lệ (ví dụ: example@domain.com)">
                     </div>
                     <div class="form-group">
-                        <input type="tel" name="phone" placeholder="Số điện thoại" required>
+                        <input type="text" id="phone" name="phone" placeholder="Số điện thoại" required pattern="[0-9]{10}" maxlength="10" title="Số điện thoại phải bao gồm 10 chữ số.">
                     </div>
                     <div class="form-group">
                         <input type="text" name="address" placeholder="Địa chỉ">

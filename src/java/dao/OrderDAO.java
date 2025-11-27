@@ -34,7 +34,7 @@ public class OrderDAO {
         
         try (PreparedStatement psOrder = conn.prepareStatement(insertOrderSQL, Statement.RETURN_GENERATED_KEYS)) {
             psOrder.setInt(1, user.getId());
-            psOrder.setDouble(2, cart.getTotalMoney());
+            psOrder.setDouble(2, cart.getFinalTotal());
             psOrder.setString(3, shippingAddress);
             psOrder.executeUpdate();
             
@@ -274,4 +274,59 @@ public double calculateRevenueThisMonth() {
      }
      return order;
  }
+    // Dán hàm này vào bên trong class OrderDAO
+    public Order getOrderById(int orderId) {
+        Order order = null;
+        String query = "SELECT * FROM orders WHERE id = ?";
+        try (Connection conn = DBContext.getConnection();
+             PreparedStatement ps = conn.prepareStatement(query)) {
+
+            ps.setInt(1, orderId);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    order = new Order();
+                    order.setId(rs.getInt("id"));
+                    order.setUserId(rs.getInt("user_id"));
+                    order.setOrderDate(rs.getTimestamp("order_date"));
+                    order.setTotalMoney(rs.getDouble("total_money"));
+                    order.setShippingAddress(rs.getString("shipping_address"));
+                    order.setStatus(rs.getString("status"));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return order;
+    }
+    // Thêm vào OrderDAO.java
+    public double calculateTotalRevenue() {
+        String query = "SELECT SUM(total_money) FROM orders WHERE status = 'completed'";
+        try (Connection conn = DBContext.getConnection();
+             PreparedStatement ps = conn.prepareStatement(query);
+             ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                return rs.getDouble(1);
+            }
+        } catch (Exception e) { e.printStackTrace(); }
+        return 0.0;
+    }
+    // ... (Các hàm calculateRevenue khác)
+
+    // --- THÊM HÀM NÀY ---
+    public double calculateRevenueThisYear() {
+        // Tính tổng tiền các đơn hàng hoàn thành trong năm hiện tại
+        String condition = "YEAR(order_date) = YEAR(CURDATE())";
+        // Tái sử dụng hàm calculateRevenue(condition) nếu bạn đã có (như trong code cũ)
+        // Hoặc viết full câu query như dưới đây:
+        String query = "SELECT SUM(total_money) FROM orders WHERE status = 'completed' AND " + condition;
+        try (Connection conn = DBContext.getConnection();
+             PreparedStatement ps = conn.prepareStatement(query);
+             ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                return rs.getDouble(1);
+            }
+        } catch (Exception e) { e.printStackTrace(); }
+        return 0.0;
+    }
 }

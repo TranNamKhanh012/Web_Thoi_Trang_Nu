@@ -678,4 +678,38 @@ public int countOnSaleProducts(Integer categoryId, Double minPrice, Double maxPr
     } catch (Exception e) { e.printStackTrace(); }
     return 0;
 }
+/**
+     * Lấy danh sách sản phẩm liên quan (cùng danh mục, trừ sản phẩm hiện tại).
+     * @param categoryId ID của danh mục.
+     * @param currentProductId ID của sản phẩm đang xem (để loại trừ nó).
+     * @return Danh sách sản phẩm liên quan.
+     */
+    public List<Product> getRelatedProducts(int categoryId, int currentProductId) {
+        List<Product> list = new ArrayList<>();
+        // Lấy 4 sản phẩm ngẫu nhiên cùng danh mục
+        String query = "SELECT * FROM products WHERE category_id = ? AND id != ? ORDER BY RAND() LIMIT 4";
+        
+        try (Connection conn = DBContext.getConnection();
+             PreparedStatement ps = conn.prepareStatement(query)) {
+            
+            ps.setInt(1, categoryId);
+            ps.setInt(2, currentProductId);
+            
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Product p = new Product();
+                    p.setId(rs.getInt("id"));
+                    p.setName(rs.getString("name"));
+                    p.setOriginalPrice(rs.getDouble("original_price"));
+                    p.setSalePrice(rs.getDouble("sale_price"));
+                    p.setImageUrl(rs.getString("image_url"));
+                    // (Không cần lấy tất cả chi tiết, chỉ cần đủ để hiển thị card)
+                    list.add(p);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 }

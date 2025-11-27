@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
     footer .container {
-        display: block !important; 
+        display: block !important;
     }
 </style>
 <footer>
@@ -29,18 +29,18 @@
             <div class="footer-column">
                 <h4>HỖ TRỢ KHÁCH HÀNG</h4>
                 <ul>
-                    <li><a href="#">Đơn hàng</a></li>
-                    <li><a href="#">Chính sách đối tác</a></li>
-                    <li><a href="#">Chính sách đổi trả</a></li>
-                    <li><a href="#">Chính sách giao hàng</a></li>
-                    <li><a href="#">Chính sách thanh toán</a></li>
+                    <li><a href="${pageContext.request.contextPath}/order-history">Đơn hàng</a></li>
+                    <li><a href="${pageContext.request.contextPath}/partner-policy">Chính sách đối tác</a></li>
+                    <li><a href="${pageContext.request.contextPath}/return-policy">Chính sách đổi trả</a></li>
+                    <li><a href="${pageContext.request.contextPath}/shipping-policy">Chính sách giao hàng</a></li>
+                    <li><a href="${pageContext.request.contextPath}/payment-policy">Chính sách thanh toán</a></li>
                 </ul>
             </div>
             <div class="footer-column">
                 <h4>TƯ VẤN KHÁCH HÀNG</h4>
-                <p>Mua hàng: 0123456789</p>
-                <p>Khiếu nại: 0123456789</p>
-                <p>Bảo hành: 0123456789</p>
+                <p>Mua hàng: 0941655919</p>
+                <p>Khiếu nại: 0941655JQK</p>
+                <p>Bảo hành: 0941655789</p>
             </div>
         </div>
         <div class="footer-bottom">
@@ -51,15 +51,15 @@
 </footer>
 <!--Start of Tawk.to Script-->
 <script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/690390a9d8bd2d195501a167/1j8quq5it';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
+    var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+    (function () {
+        var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+        s1.async = true;
+        s1.src = 'https://embed.tawk.to/690390a9d8bd2d195501a167/1j8quq5it';
+        s1.charset = 'UTF-8';
+        s1.setAttribute('crossorigin', '*');
+        s0.parentNode.insertBefore(s1, s0);
+    })();
 </script>
 <!--End of Tawk.to Script-->
 </body>

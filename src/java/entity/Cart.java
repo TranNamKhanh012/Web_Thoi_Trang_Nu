@@ -6,7 +6,8 @@ import java.util.Map;
 public class Cart {
     // THAY ĐỔI TỪ Map<Integer, CartItem>
     private Map<String, CartItem> items;
-
+    private static final int PROMO_QUANTITY_THRESHOLD = 3; // Mua từ 3 sản phẩm
+    private static final double PROMO_AMOUNT = 50000;
     public Cart() {
         items = new HashMap<>();
     }
@@ -62,5 +63,30 @@ public class Cart {
             total += item.getTotalPrice();
         }
         return total;
+    }
+    // --- PHƯƠNG THỨC MỚI 1: TÍNH GIẢM GIÁ ---
+    /**
+     * Tính toán số tiền được giảm giá.
+     * @return 50000 nếu tổng số lượng >= 3, ngược lại trả về 0.
+     */
+    public double getDiscount() {
+        if (getTotalQuantity() >= PROMO_QUANTITY_THRESHOLD) {
+            return PROMO_AMOUNT;
+        }
+        return 0;
+    }
+    
+    // --- PHƯƠNG THỨC MỚI 2: TÍNH TỔNG TIỀN CUỐI CÙNG ---
+    /**
+     * Lấy tổng tiền cuối cùng sau khi đã áp dụng giảm giá.
+     * @return Tổng tiền (đảm bảo không bị âm).
+     */
+    public double getFinalTotal() {
+        double subtotal = getTotalMoney();
+        double discount = getDiscount();
+        double finalTotal = subtotal - discount;
+        
+        // Đảm bảo tổng tiền không bao giờ âm
+        return Math.max(0, finalTotal); 
     }
 }
