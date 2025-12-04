@@ -2,46 +2,110 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Đăng nhập</title>
-    <link href="css/style.css" rel="stylesheet" type="text/css"/>
-    <style>
-        .page-container { margin-top: 135px; background-color: #f7f7f7; padding: 50px 0; }
-        .auth-form { width: 400px; margin: 0 auto; background: white; padding: 30px; border: 1px solid #eee; text-align: center; }
-        .auth-form h2 { margin-bottom: 20px; font-size: 24px; }
-        .form-group { margin-bottom: 15px; }
-        .form-group input { width: 100%; padding: 12px; border: 1px solid #ddd; }
-        .btn-submit { width: 100%; padding: 12px; background: #222; color: white; border: none; cursor: pointer; font-weight: bold; }
-        .auth-links { display: flex; justify-content: space-between; margin-top: 15px; }
-        .error-message { color: red; margin-bottom: 15px; }
-    </style>
-</head>
-<body>
-    <jsp:include page="header.jsp" />
-    <div class="page-container">
-        <div class="container">
-            <div class="auth-form">
-                <h2>ĐĂNG NHẬP</h2>
-                <c:if test="${not empty error}">
-                    <p class="error-message">${error}</p>
-                </c:if>
-                <form action="login" method="POST">
-                    <div class="form-group">
-                        <input type="email" name="email" placeholder="Email" required>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Đăng nhập</title>
+        <link href="css/style.css" rel="stylesheet" type="text/css"/>
+        <style>
+            .page-container {
+                margin-top: 135px;
+                background-color: #f7f7f7;
+                padding: 50px 0;
+            }
+            .auth-form {
+                width: 400px;
+                margin: 0 auto;
+                background: white;
+                padding: 30px;
+                border: 1px solid #eee;
+                text-align: center;
+            }
+            .auth-form h2 {
+                margin-bottom: 20px;
+                font-size: 24px;
+            }
+            .form-group {
+                margin-bottom: 15px;
+            }
+            .form-group input {
+                width: 100%;
+                padding: 12px;
+                border: 1px solid #ddd;
+            }
+            .btn-submit {
+                width: 100%;
+                padding: 12px;
+                background: #222;
+                color: white;
+                border: none;
+                cursor: pointer;
+                font-weight: bold;
+            }
+            .auth-links {
+                display: flex;
+                justify-content: space-between;
+                margin-top: 15px;
+            }
+            .error-message {
+                color: red;
+                margin-bottom: 15px;
+            }
+        </style>
+    </head>
+    <body>
+        <jsp:include page="header.jsp" />
+        <div class="page-container">
+            <div class="container">
+                <div class="auth-form">
+                    <h2>ĐĂNG NHẬP</h2>
+                    <c:if test="${not empty error}">
+                        <p class="error-message">${error}</p>
+                    </c:if>
+                    <form action="login" method="POST">
+                        <div class="form-group">
+                            <input type="email" name="email" placeholder="Email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" name="pass" placeholder="Mật khẩu" required>
+                        </div>
+                        <button type="submit" class="btn-submit">ĐĂNG NHẬP</button>
+                        <div style="margin-top: 25px; text-align: center; position: relative;">
+                            
+                            <p style="margin-bottom: 15px; font-size: 13px; color: #888; position: relative; z-index: 1; background: #fff; display: inline-block; padding: 0 10px;">
+                                HOẶC
+                            </p>
+                            <div style="position: absolute; top: 50%; left: 0; width: 100%; height: 1px; background: #eee; z-index: 0;"></div>
+
+                            
+                            <a href="${pageContext.request.contextPath}/login-qr" style="
+                               display: flex;
+                               align-items: center;
+                               justify-content: center;
+                               text-decoration: none;
+                               color: #333;
+                               font-weight: 600;
+                               border: 1px solid #ddd;
+                               padding: 10px 15px;
+                               border-radius: 5px;
+                               background: #fff;
+                               transition: all 0.3s;
+                               box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+                               " onmouseover="this.style.borderColor = '#007bff'; this.style.color = '#007bff';" 
+                               onmouseout="this.style.borderColor = '#ddd'; this.style.color = '#333';">
+
+                               
+                                <i class="fa-solid fa-qrcode" style="font-size: 20px; margin-right: 10px;"></i>
+                                Đăng nhập nhanh bằng mã QR
+                            </a>
+                        </div>
+                    </form>
+                    <div class="auth-links">
+                        <a href="forgot-password">Quên mật khẩu?</a>
+                        <a href="register">Đăng ký tại đây</a>
                     </div>
-                    <div class="form-group">
-                        <input type="password" name="pass" placeholder="Mật khẩu" required>
-                    </div>
-                    <button type="submit" class="btn-submit">ĐĂNG NHẬP</button>
-                </form>
-                <div class="auth-links">
-                    <a href="forgot-password">Quên mật khẩu?</a>
-                    <a href="register">Đăng ký tại đây</a>
                 </div>
             </div>
         </div>
-    </div>
-    <jsp:include page="footer.jsp" />
-</body>
+        <jsp:include page="footer.jsp" />
+    </body>
 </html>

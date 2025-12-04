@@ -16,48 +16,155 @@
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <style>
             /* --- Cài đặt chung & Reset --- */
-            * { margin: 0; padding: 0; box-sizing: border-box; }
-            body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7fc; color: #333; }
-            a { text-decoration: none; color: inherit; }
-            ul { list-style: none; }
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            body {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                background-color: #f4f7fc;
+                color: #333;
+            }
+            a {
+                text-decoration: none;
+                color: inherit;
+            }
+            ul {
+                list-style: none;
+            }
 
             /* --- Layout chính --- */
-            .admin-layout { display: flex; min-height: 100vh; }
+            .admin-layout {
+                display: flex;
+                min-height: 100vh;
+            }
 
             /* --- Sidebar --- */
-            .admin-sidebar { width: 250px; background-color: #2c3e50; color: #ecf0f1; display: flex; flex-direction: column; flex-shrink: 0; }
-            .sidebar-header { padding: 20px; text-align: center; background-color: #34495e; }
-            .sidebar-header h2 { font-size: 24px; }
-            .sidebar-nav ul { padding-top: 20px; }
-            .sidebar-nav li a { display: block; padding: 15px 20px; color: #bdc3c7; transition: background-color 0.3s, color 0.3s; }
-            .sidebar-nav li a i { margin-right: 15px; width: 20px; text-align: center; }
-            .sidebar-nav li a:hover, .sidebar-nav li a.active { background-color: #3498db; color: #fff; }
+            .admin-sidebar {
+                width: 250px;
+                background-color: #2c3e50;
+                color: #ecf0f1;
+                display: flex;
+                flex-direction: column;
+                flex-shrink: 0;
+            }
+            .sidebar-header {
+                padding: 20px;
+                text-align: center;
+                background-color: #34495e;
+            }
+            .sidebar-header h2 {
+                font-size: 24px;
+            }
+            .sidebar-nav ul {
+                padding-top: 20px;
+            }
+            .sidebar-nav li a {
+                display: block;
+                padding: 15px 20px;
+                color: #bdc3c7;
+                transition: background-color 0.3s, color 0.3s;
+            }
+            .sidebar-nav li a i {
+                margin-right: 15px;
+                width: 20px;
+                text-align: center;
+            }
+            .sidebar-nav li a:hover, .sidebar-nav li a.active {
+                background-color: #3498db;
+                color: #fff;
+            }
 
             /* --- Main Content --- */
-            .admin-main-content { flex-grow: 1; padding: 30px; background-color: #f4f7fc; }
-            .admin-header { margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid #e0e0e0; }
-            .admin-header h1 { font-size: 28px; color: #2c3e50; }
+            .admin-main-content {
+                flex-grow: 1;
+                padding: 30px;
+                background-color: #f4f7fc;
+            }
+            .admin-header {
+                margin-bottom: 30px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #e0e0e0;
+            }
+            .admin-header h1 {
+                font-size: 28px;
+                color: #2c3e50;
+            }
 
             /* --- Phần thống kê --- */
-            .dashboard-stats, .dashboard-finance, .dashboard-chart { margin-bottom: 40px; }
-            .dashboard-stats h2, .dashboard-finance h2, .dashboard-chart h2 { font-size: 20px; color: #34495e; margin-bottom: 20px; }
-            .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
-            .stat-card { background-color: #fff; border-radius: 8px; padding: 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-            .stat-info h3 { font-size: 28px; color: #2c3e50; margin-bottom: 5px; }
-            .stat-info p { color: #7f8c8d; font-size: 14px; }
-            .stat-icon { font-size: 24px; color: #fff; width: 50px; height: 50px; display: flex; justify-content: center; align-items: center; border-radius: 50%; }
-            
+            .dashboard-stats, .dashboard-finance, .dashboard-chart {
+                margin-bottom: 40px;
+            }
+            .dashboard-stats h2, .dashboard-finance h2, .dashboard-chart h2 {
+                font-size: 20px;
+                color: #34495e;
+                margin-bottom: 20px;
+            }
+            .stats-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+                gap: 20px;
+            }
+            .stat-card {
+                background-color: #fff;
+                border-radius: 8px;
+                padding: 20px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            }
+            .stat-info h3 {
+                font-size: 28px;
+                color: #2c3e50;
+                margin-bottom: 5px;
+            }
+            .stat-info p {
+                color: #7f8c8d;
+                font-size: 14px;
+            }
+            .stat-icon {
+                font-size: 24px;
+                color: #fff;
+                width: 50px;
+                height: 50px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 50%;
+            }
+
             /* Màu cho icon */
-            .stat-icon.purple { background-color: #9b59b6; }
-            .stat-icon.blue { background-color: #3498db; }
-            .stat-icon.orange { background-color: #e67e22; }
-            .stat-icon.pink { background-color: #e84393; }
-            .stat-icon.green { background-color: #2ecc71; }
-            .stat-icon.light-blue { background-color: #1abc9c; }
-            .stat-icon.yellow { background-color: #f1c40f; }
-            
+            .stat-icon.purple {
+                background-color: #9b59b6;
+            }
+            .stat-icon.blue {
+                background-color: #3498db;
+            }
+            .stat-icon.orange {
+                background-color: #e67e22;
+            }
+            .stat-icon.pink {
+                background-color: #e84393;
+            }
+            .stat-icon.green {
+                background-color: #2ecc71;
+            }
+            .stat-icon.light-blue {
+                background-color: #1abc9c;
+            }
+            .stat-icon.yellow {
+                background-color: #f1c40f;
+            }
+
             /* --- Phần biểu đồ --- */
-            .chart-container { background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+            .chart-container {
+                background-color: #fff;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            }
         </style>
     </head>
     <body>
@@ -76,6 +183,8 @@
                         <li><a href="${pageContext.request.contextPath}/admin/orders" class="${activePage == 'orders' ? 'active' : ''}"><i class="fa-solid fa-receipt"></i> Quản lý Đơn hàng</a></li>
                         <li><a href="${pageContext.request.contextPath}/admin/articles" class="${activePage == 'articles' ? 'active' : ''}"><i class="fa-solid fa-newspaper"></i> Quản lý Bài viết</a></li>
                         <li><a href="${pageContext.request.contextPath}/admin/feedback" class="${activePage == 'feedback' ? 'active' : ''}"><i class="fa-solid fa-comment-dots"></i> Quản lý Phản hồi</a></li>
+                        <li><a href="${pageContext.request.contextPath}/admin/settings" class="${activePage == 'settings' ? 'active' : ''}"><i class="fa-solid fa-gear"></i> Quản lý ngày giảm giá</a></li>
+                        <li><a href="${pageContext.request.contextPath}/admin/inventory" class="${activePage == 'inventory' ? 'active' : ''}"><i class="fa-solid fa-boxes-stacked"></i> Thống kê Hàng tồn</a></li>
                         <li><a href="${pageContext.request.contextPath}/home"><i class="fa-solid fa-arrow-right-from-bracket"></i> Về trang chủ</a></li>
                     </ul>
                 </nav>
@@ -181,18 +290,17 @@
                             </div>
                         </div>
 
-                        <div class="stat-card finance" style="border-left: 4px solid #dc3545;">
-                            <div class="stat-info">
-                                <%-- Hiển thị thuế NĂM nay --%>
-                                <h3 style="color: #dc3545;"><fmt:formatNumber value="${estimatedTaxYear}" type="number"/>đ</h3>
-                                <p>Thuế phải nộp </p>
-                                
-                            </div>
-                            <div class="stat-icon" style="background-color: #dc3545;">
-                                <i class="fa-solid fa-file-invoice-dollar"></i>
-                            </div>
-                        </div>
 
+                            <div class="stat-card finance" style="border-left: 4px solid #dc3545;">
+                                     <div class="stat-info">
+                                         <h3 style="color: #dc3545;"><fmt:formatNumber value="${estimatedTaxYear}" type="number"/>đ</h3>
+                                         <p>Thuế phải nộp </p>
+                                         
+                                     </div>
+                                     <div class="stat-icon" style="background-color: #dc3545;">
+                                         <i class="fa-solid fa-file-invoice-dollar"></i>
+                                     </div>
+                                 </div> 
                     </div>
                 </section>
 

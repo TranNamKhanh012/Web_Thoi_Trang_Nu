@@ -168,6 +168,13 @@
                 <div class="breadcrumbs">
                     <a href="home">Trang chủ</a> > Khuyến mãi
                 </div>
+                <%-- >>> THÔNG BÁO KHUYẾN MÃI ĐẶC BIỆT <<< --%>
+                <c:if test="${isSpecialDay}">
+                    <div style="background-color: #ffeeba; color: #856404; padding: 15px; border-radius: 8px; margin-bottom: 20px; text-align: center; border: 1px solid #ffeeba;">
+                        <h3 style="margin: 0; font-size: 20px;">🎉 HAPPY DAY! 🎉</h3>
+                        <p style="margin: 5px 0 0 0;">Tất cả sản phẩm khuyến mãi đã được <strong>GIẢM THÊM ${sessionScope.cart.promotionPercent}%</strong> trên giá hiển thị. Mua ngay kẻo lỡ!</p>
+                    </div>
+                </c:if>
                 <%-- >>> THÊM THANH LỌC/SẮP XẾP <<< --%>
                 <form action="promotions" method="GET" class="filter-sort-bar">
                     <div class="filter-group">
@@ -181,7 +188,7 @@
                             <label><input type="checkbox" name="priceRange" value="1000000-150000000" ${selectedPriceRanges.contains('1000000-150000000') ? 'checked' : ''}> Trên 1.000.000đ</label>
                         </div>
                     </div>
-                        
+
                     <div class="sort-apply-group">
                         <div class="sort-group">
                             <label for="sort-select">Sắp xếp theo:</label>

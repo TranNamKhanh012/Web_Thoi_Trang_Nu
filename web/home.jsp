@@ -6,7 +6,7 @@
 
 <%-- THÊM CSS CHO SLIDER TẠI ĐÂY --%>
 <style>
-   /* --- Banner Slider --- */
+    /* --- Banner Slider --- */
     .banner {
         /* Dùng CSS cũ của bạn, nhưng đảm bảo nó hoạt động như container */
         margin-top: 135px; /* Giả sử chiều cao header của bạn là 135px */
@@ -29,14 +29,18 @@
         display: none; /* Ẩn tất cả slide ban đầu */
         animation: fadeEffect 1.5s; /* Hiệu ứng mờ/hiện */
     }
-    
+
     .slide.active {
         display: block; /* Chỉ hiện slide active */
     }
 
     @keyframes fadeEffect {
-        from {opacity: .4}
-        to {opacity: 1}
+        from {
+            opacity: .4
+        }
+        to {
+            opacity: 1
+        }
     }
 
     .slide img {
@@ -63,8 +67,13 @@
         border: none;
         z-index: 10;
     }
-    .next { right: 0; border-radius: 3px 0 0 3px; }
-    .prev:hover, .next:hover { background-color: rgba(0,0,0,0.7); }
+    .next {
+        right: 0;
+        border-radius: 3px 0 0 3px;
+    }
+    .prev:hover, .next:hover {
+        background-color: rgba(0,0,0,0.7);
+    }
 
     /* Dấu chấm */
     .dots-container {
@@ -84,7 +93,20 @@
         display: inline-block;
         transition: background-color 0.3s ease;
     }
-    .dot.active, .dot:hover { background-color: #ffffff; }
+    .dot.active, .dot:hover {
+        background-color: #ffffff;
+    }
+    /* CSS Tag Giảm giá mới */
+    .discount-badge {
+        background-color: #dc3545;
+        color: white;
+        font-size: 11px;
+        font-weight: bold;
+        padding: 2px 6px;
+        border-radius: 4px;
+        margin-left: 5px;
+        vertical-align: middle;
+    }
 </style>
 
 <%-- SỬA LẠI SECTION BANNER --%>
@@ -102,7 +124,7 @@
         </div>
         <%-- Slide 3 --%>
         <div class="slide">
-             <%-- Thay bằng link ảnh của bạn --%>
+            <%-- Thay bằng link ảnh của bạn --%>
             <img src="images/banner9.jpg" alt="Banner 3">
         </div>
     </div>
@@ -119,6 +141,16 @@
 
 <main>
     <div class="container">
+        <%-- >>> CHÈN BANNER VÀO ĐÂY <<< --%>
+        <c:if test="${isSpecialDay}">
+            <div style="background-color: #ffeeba; color: #856404; padding: 20px; margin-bottom: 30px; border-radius: 8px; text-align: center; border: 1px solid #ffeeba; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                <h3 style="margin: 0; font-size: 24px; text-transform: uppercase;">🎉 Happy Day! 🎉</h3>
+                <p style="margin: 5px 0 0 0; font-size: 16px;">
+                    Duy nhất hôm nay: <strong>GIẢM THÊM ${sessionScope.cart.promotionPercent}%</strong> cho toàn bộ sản phẩm.
+                </p>
+            </div>
+        </c:if>
+        <%-- >>> KẾT THÚC BANNER <<< --%>
         <%-- 1. Khối Chính sách & Cam kết (GIỮ NGUYÊN) --%>
         <section class="policy-bar">
             <div class="policy-item">
@@ -150,7 +182,6 @@
                 </div>
             </div>
         </section>
-
         <%-- 2. Khối Top Bán Chạy (GIỮ NGUYÊN) --%>
         <section class="product-showcase">
             <h2 class="section-title">Top Bán Chạy</h2>
@@ -168,12 +199,24 @@
                         <div class="product-info">
                             <h3 class="product-name"><a href="detail?pid=${p.id}">${p.name}</a></h3>
                             <div class="product-price">
-                                <span class="sale-price">
+                                <%-- LOGIC HIỂN THỊ GIÁ MỚI (Bao gồm Happy Weekend) --%>
+                                <span class="sale-price" style="color: #dc3545; font-weight: bold; font-size: 18px;">
                                     <fmt:formatNumber value="${p.salePrice > 0 ? p.salePrice : p.originalPrice}" type="number" maxFractionDigits="0"/>đ
                                 </span>
-                                <c:if test="${p.salePrice > 0 && p.salePrice < p.originalPrice}">
-                                    <span class="original-price">
-                                        <fmt:formatNumber value="${p.originalPrice}" type="number" maxFractionDigits="0"/>đ
+
+                                <%-- Nếu là ngày khuyến mãi, hiển thị giá gốc gạch ngang và badge --%>
+                                <c:if test="${isSpecialDay}">
+                                    <div style="margin-top: 5px;">
+                                        <span class="original-price" style="text-decoration: line-through; color: #888; font-size: 13px;">
+                                            <fmt:formatNumber value="${p.originalPrice}" type="number"/>đ
+                                        </span>
+                                    </div>
+                                </c:if>
+
+                                <%-- Logic cũ: Nếu không phải ngày KM nhưng sản phẩm có sale sẵn --%>
+                                <c:if test="${!isSpecialDay && p.salePrice > 0 && p.salePrice < p.originalPrice}">
+                                    <span class="original-price" style="text-decoration: line-through; color: #888; font-size: 14px; margin-left: 8px;">
+                                        <fmt:formatNumber value="${p.originalPrice}" type="number"/>đ
                                     </span>
                                 </c:if>
                             </div>
@@ -201,12 +244,24 @@
                         <div class="product-info">
                             <h3 class="product-name"><a href="detail?pid=${p.id}">${p.name}</a></h3>
                             <div class="product-price">
-                                <span class="sale-price">
+                                <%-- LOGIC HIỂN THỊ GIÁ MỚI (Bao gồm Happy Weekend) --%>
+                                <span class="sale-price" style="color: #dc3545; font-weight: bold; font-size: 18px;">
                                     <fmt:formatNumber value="${p.salePrice > 0 ? p.salePrice : p.originalPrice}" type="number" maxFractionDigits="0"/>đ
                                 </span>
-                                <c:if test="${p.salePrice > 0 && p.salePrice < p.originalPrice}">
-                                    <span class="original-price">
-                                        <fmt:formatNumber value="${p.originalPrice}" type="number" maxFractionDigits="0"/>đ
+
+                                <%-- Nếu là ngày khuyến mãi, hiển thị giá gốc gạch ngang và badge --%>
+                                <c:if test="${isSpecialDay}">
+                                    <div style="margin-top: 5px;">
+                                        <span class="original-price" style="text-decoration: line-through; color: #888; font-size: 13px;">
+                                            <fmt:formatNumber value="${p.originalPrice}" type="number"/>đ
+                                        </span>
+                                    </div>
+                                </c:if>
+
+                                <%-- Logic cũ: Nếu không phải ngày KM nhưng sản phẩm có sale sẵn --%>
+                                <c:if test="${!isSpecialDay && p.salePrice > 0 && p.salePrice < p.originalPrice}">
+                                    <span class="original-price" style="text-decoration: line-through; color: #888; font-size: 14px; margin-left: 8px;">
+                                        <fmt:formatNumber value="${p.originalPrice}" type="number"/>đ
                                     </span>
                                 </c:if>
                             </div>
@@ -216,7 +271,7 @@
                 </c:forEach>
             </div>
         </section>
-        
+
     </div>
 </main>
 
@@ -232,7 +287,8 @@
 
     // Hàm bắt đầu/reset tự động chạy
     function startAutoSlide() {
-        if (autoSlideInterval) clearInterval(autoSlideInterval);
+        if (autoSlideInterval)
+            clearInterval(autoSlideInterval);
         autoSlideInterval = setInterval(() => moveSlide(1), 5000); // Tự động chuyển slide mỗi 5 giây
     }
 
@@ -254,15 +310,19 @@
         let slides = document.getElementsByClassName("slide");
         let dots = document.getElementsByClassName("dot");
 
-        if (n > slides.length) { slideIndex = 1 } // Quay lại slide đầu
-        if (n < 1) { slideIndex = slides.length } // Về slide cuối
+        if (n > slides.length) {
+            slideIndex = 1
+        } // Quay lại slide đầu
+        if (n < 1) {
+            slideIndex = slides.length
+        } // Về slide cuối
 
         // Ẩn tất cả slide
         for (i = 0; i < slides.length; i++) {
             slides[i].style.display = "none";
             slides[i].classList.remove("active");
         }
-        
+
         // Bỏ active tất cả dấu chấm
         for (i = 0; i < dots.length; i++) {
             dots[i].className = dots[i].className.replace(" active", "");

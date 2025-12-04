@@ -1,5 +1,9 @@
 package entity;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import service.PromotionService;
+
 public class CartItem {
     private Product product;
     private int quantity;
@@ -39,13 +43,23 @@ public class CartItem {
         this.quantity = quantity;
     }
     
+    public double getEffectivePrice() {
+        double price = product.getSalePrice();
+        
+       // GỌI SERVICE ĐỂ KIỂM TRA (Thay vì check DayOfWeek tại chỗ)
+        if (PromotionService.isPromotionActive()) {
+            double discountRate = PromotionService.getDiscountRate();
+            return price * (1.0 - discountRate);
+        }
+        
+        return price;
+    }
+    
     // Phương thức tính tổng tiền cho món hàng này
     public double getTotalPrice() {
-        // Giá bán thực tế có thể là sale_price hoặc original_price
-        double price = product.getSalePrice();
-        if (price <= 0) {
-            price = product.getOriginalPrice();
-        }
-        return price * quantity;
+        // CŨ (SAI): return product.getSalePrice() * quantity;
+        
+        // MỚI (ĐÚNG): Phải gọi getEffectivePrice() để lấy giá đã giảm
+        return getEffectivePrice() * quantity;
     }
 }

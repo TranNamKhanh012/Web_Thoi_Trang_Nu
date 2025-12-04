@@ -295,6 +295,15 @@
                             <c:if test="${cat.id == activeCid}"> > ${cat.name} </c:if>
                         </c:forEach>
                     </div>
+                    <%-- >>> BANNER THÔNG BÁO KHUYẾN MÃI ĐẶC BIỆT <<< --%>
+                    <c:if test="${isSpecialDay}">
+                        <div style="background-color: #ffeeba; color: #856404; padding: 15px; border-radius: 8px; margin-bottom: 25px; text-align: center; border: 1px solid #ffeeba;">
+                            <h3 style="margin: 0; font-size: 20px;">🎉 HAPPY DAY! 🎉</h3>
+                            <p style="margin: 5px 0 0 0;">
+                                Tất cả sản phẩm tại cửa hàng đang được <strong>GIẢM THÊM ${sessionScope.cart.promotionPercent}%</strong>. 
+                            </p>
+                        </div>
+                    </c:if>
 
                     <%-- THANH LỌC DANH MỤC (HIỆN LẠI) --%>
                     <div class="category-filter-bar">

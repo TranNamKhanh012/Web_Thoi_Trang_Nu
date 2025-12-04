@@ -1,9 +1,7 @@
 package controller;
 
-// import dao.CategoryDAO; // Không cần thiết trong logic mới
 import dao.ProductDAO;
 import dao.ProductSizeDAO;
-// import entity.Category; // Không cần thiết
 import entity.Product;
 import entity.ProductSize;
 import java.io.IOException;
@@ -13,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import service.PromotionService; // Import Service mới
 
 @WebServlet(name = "DetailController", urlPatterns = {"/detail"})
 public class DetailController extends HttpServlet {
@@ -30,33 +29,50 @@ public class DetailController extends HttpServlet {
             // 1. Lấy sản phẩm chính
             Product product = productDAO.getProductById(productId);
 
-            // === SỬA LỖI QUAN TRỌNG: KIỂM TRA NULL ===
+            // === KIỂM TRA NULL (QUAN TRỌNG) ===
             if (product == null) {
-                // Nếu không tìm thấy sản phẩm (pid không hợp lệ), chuyển về trang chủ
+                // Nếu không tìm thấy sản phẩm, chuyển về trang chủ
                 response.sendRedirect("home");
-                return; // Dừng thực thi
+                return;
             }
-            // =======================================
+
+            // === LOGIC KHUYẾN MÃI TỰ ĐỘNG (DÙNG SERVICE) ===
+            // Kiểm tra xem có khuyến mãi không dựa trên cấu hình Admin
+            boolean isSpecialDay = PromotionService.isPromotionActive();
+            
+            if (isSpecialDay) {
+                // Lấy % giảm giá từ cấu hình
+                double discountRate = PromotionService.getDiscountRate();
+                
+                // Lấy giá hiện tại (ưu tiên giá sale nếu có, nếu không lấy giá gốc)
+                double currentPrice = product.getSalePrice() > 0 ? product.getSalePrice() : product.getOriginalPrice();
+                
+                // Tính giá mới sau khi giảm thêm
+                double newSalePrice = currentPrice * (1.0 - discountRate);
+                
+                // Ghi đè giá sale để hiển thị
+                product.setSalePrice(newSalePrice);
+            }
+            request.setAttribute("isSpecialDay", isSpecialDay);
+            // ===============================================
 
             // 2. Lấy danh sách size
             List<ProductSize> sizeList = sizeDAO.getSizesByProductId(productId);
             
-            // 3. THÊM MỚI: LẤY SẢN PHẨM LIÊN QUAN
-            // (Sử dụng hàm getRelatedProducts bạn đã thêm vào ProductDAO)
+            // 3. Lấy sản phẩm liên quan
             List<Product> relatedProducts = productDAO.getRelatedProducts(
-                    product.getCategoryId(), // Lấy ID danh mục từ sản phẩm
-                    product.getId()          // Lấy ID sản phẩm hiện tại để loại trừ
+                    product.getCategoryId(), 
+                    product.getId()
             );
 
-            // 4. Gửi tất cả dữ liệu sang JSP
+            // 4. Gửi dữ liệu sang JSP
             request.setAttribute("productDetail", product);
             request.setAttribute("sizeList", sizeList);
-            request.setAttribute("relatedProducts", relatedProducts); // Gửi danh sách liên quan
+            request.setAttribute("relatedProducts", relatedProducts);
             
             request.getRequestDispatcher("detail.jsp").forward(request, response);
             
         } catch (NumberFormatException e) {
-            // Xử lý trường hợp 'pid' không phải là số (ví dụ: detail?pid=abc)
             response.sendRedirect("home");
         }
     }

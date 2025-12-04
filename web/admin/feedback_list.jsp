@@ -66,7 +66,9 @@
                         <li><a href="${pageContext.request.contextPath}/admin/users" class="${activePage == 'users' ? 'active' : ''}"><i class="fa-solid fa-users"></i> Quản lý Người dùng</a></li>
                         <li><a href="${pageContext.request.contextPath}/admin/orders" class="${activePage == 'orders' ? 'active' : ''}"><i class="fa-solid fa-receipt"></i> Quản lý Đơn hàng</a></li>
                         <li><a href="${pageContext.request.contextPath}/admin/articles" class="${activePage == 'articles' ? 'active' : ''}"><i class="fa-solid fa-newspaper"></i> Quản lý Bài viết</a></li>
-                        <li><a href="${pageContext.request.contextPath}/admin/feedback" class="${activePage == 'feedback' ? 'active' : ''}"><i class="fa-solid fa-comment-dots"></i> Quản lý Phản hồi</a></li> <%-- Link mới --%>
+                        <li><a href="${pageContext.request.contextPath}/admin/feedback" class="${activePage == 'feedback' ? 'active' : ''}"><i class="fa-solid fa-comment-dots"></i> Quản lý Phản hồi</a></li>
+                        <li><a href="${pageContext.request.contextPath}/admin/settings" class="${activePage == 'settings' ? 'active' : ''}"><i class="fa-solid fa-gear"></i> Quản lý ngày giảm giá</a></li>
+                        <li><a href="${pageContext.request.contextPath}/admin/inventory" class="${activePage == 'inventory' ? 'active' : ''}"><i class="fa-solid fa-boxes-stacked"></i> Thống kê Hàng tồn</a></li>
                         <li><a href="${pageContext.request.contextPath}/home"><i class="fa-solid fa-arrow-right-from-bracket"></i> Về trang chủ</a></li>
                     </ul>
                 </nav>

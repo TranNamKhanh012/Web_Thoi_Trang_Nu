@@ -22,7 +22,7 @@ public class VNPayConfig {
     // ----------------------------------------------
     
     public static String vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-    public static String vnp_ReturnUrl = "https://8065aca0d5a5.ngrok-free.app/Web_BanThoiTrangNu/vnpay_return.jsp"; // URL trang Return
+    public static String vnp_ReturnUrl = "https://7c94397cfb0d.ngrok-free.app/Web_BanThoiTrangNu/vnpay_return.jsp"; // URL trang Return
     public static String vnp_IpAddr = "127.0.0.1";
     public static String vnp_ApiUrl = "https://sandbox.vnpayment.vn/merchant_webapi/api/transaction";
 

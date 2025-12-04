@@ -12,6 +12,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import service.PromotionService;
 
 @WebServlet(name = "ProductController", urlPatterns = {"/products"})
 public class ProductController extends HttpServlet {
@@ -122,6 +125,27 @@ public class ProductController extends HttpServlet {
             productList = productDAO.getProductsByCategoryId(categoryId, minPrice, maxPrice, sortBy, sortOrder, PAGE_SIZE, offset);
         }
 
+        // === LOGIC KHUYẾN MÃI TỰ ĐỘNG (DÙNG SERVICE) ===
+        // 1. Kiểm tra xem có khuyến mãi không
+        boolean isSpecialDay = PromotionService.isPromotionActive();
+        
+        if (isSpecialDay) {
+            // 2. Lấy % giảm giá từ cấu hình
+            double discountRate = PromotionService.getDiscountRate();
+
+            for (Product p : productList) {
+                // Lấy giá hiện tại (ưu tiên giá sale nếu có)
+                double currentPrice = p.getSalePrice() > 0 ? p.getSalePrice() : p.getOriginalPrice();
+                
+                // Tính giá mới
+                double newSalePrice = currentPrice * (1.0 - discountRate);
+                
+                // Ghi đè giá sale để hiển thị
+                p.setSalePrice(newSalePrice);
+            }
+        }
+        request.setAttribute("isSpecialDay", isSpecialDay);
+        // ===============================================
         List<Category> categoryList = categoryDAO.getAllCategories();
 
         // --- 4. GỬI DỮ LIỆU SANG JSP ---

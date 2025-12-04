@@ -161,73 +161,83 @@
                 line-height: 1.5;
             }
             .product-info-section .sold-quantity {
-            font-size: 16px;
-            color: #555;
-            margin-left: 15px;
-            border-left: 2px solid #eee;
-            padding-left: 15px;
-        }
-        /* === CSS CHO SẢN PHẨM LIÊN QUAN === */
-        .related-products-section {
-            background-color: #fff;
-            padding: 30px;
-            margin-top: 30px;
-            border-radius: 8px;
-        }
-        .related-products-section h2 {
-            font-size: 24px;
-            font-weight: 600;
-            margin-bottom: 25px;
-            text-align: center;
-        }
-        
-        /* Tái sử dụng .product-list, giả sử nó đã có display: grid */
-        /* Nếu chưa có, bạn có thể dùng CSS từ file style.css */
-        .product-list {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr); /* 4 sản phẩm trên 1 hàng */
-            gap: 20px;
-        }
-        .product-item {
-            text-align: center;
-            border: 1px solid #eee;
-            padding: 15px;
-            border-radius: 5px;
-            transition: box-shadow 0.3s ease;
-        }
-        .product-item:hover {
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-        }
-        .product-item img {
-            width: 100%;
-            aspect-ratio: 1 / 1.2;
-            object-fit: cover;
-            margin-bottom: 10px;
-        }
-        .product-item .product-name {
-            font-size: 16px;
-            font-weight: 500;
-            margin-bottom: 10px;
-            color: #333;
-            /* Cắt ngắn tên nếu quá dài (2 dòng) */
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            height: 48px; /* (2 dòng x 24px line-height) */
-        }
-        .product-item .product-price .sale-price {
-            font-size: 16px;
-            font-weight: bold;
-            color: #dc3545;
-        }
-        .product-item .product-price .original-price {
-            font-size: 13px;
-            color: #888;
-            text-decoration: line-through;
-            margin-left: 8px;
-        }
+                font-size: 16px;
+                color: #555;
+                margin-left: 15px;
+                border-left: 2px solid #eee;
+                padding-left: 15px;
+            }
+            /* === CSS CHO SẢN PHẨM LIÊN QUAN === */
+            .related-products-section {
+                background-color: #fff;
+                padding: 30px;
+                margin-top: 30px;
+                border-radius: 8px;
+            }
+            .related-products-section h2 {
+                font-size: 24px;
+                font-weight: 600;
+                margin-bottom: 25px;
+                text-align: center;
+            }
+
+            /* Tái sử dụng .product-list, giả sử nó đã có display: grid */
+            /* Nếu chưa có, bạn có thể dùng CSS từ file style.css */
+            .product-list {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr); /* 4 sản phẩm trên 1 hàng */
+                gap: 20px;
+            }
+            .product-item {
+                text-align: center;
+                border: 1px solid #eee;
+                padding: 15px;
+                border-radius: 5px;
+                transition: box-shadow 0.3s ease;
+            }
+            .product-item:hover {
+                box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            }
+            .product-item img {
+                width: 100%;
+                aspect-ratio: 1 / 1.2;
+                object-fit: cover;
+                margin-bottom: 10px;
+            }
+            .product-item .product-name {
+                font-size: 16px;
+                font-weight: 500;
+                margin-bottom: 10px;
+                color: #333;
+                /* Cắt ngắn tên nếu quá dài (2 dòng) */
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                height: 48px; /* (2 dòng x 24px line-height) */
+            }
+            .product-item .product-price .sale-price {
+                font-size: 16px;
+                font-weight: bold;
+                color: #dc3545;
+            }
+            .product-item .product-price .original-price {
+                font-size: 13px;
+                color: #888;
+                text-decoration: line-through;
+                margin-left: 8px;
+            }
+            .discount-badge {
+                background-color: #dc3545;
+                color: white;
+                font-size: 13px;
+                font-weight: bold;
+                padding: 3px 8px;
+                border-radius: 4px;
+                margin-left: 10px;
+                vertical-align: text-bottom;
+            }
         </style>
     </head>
     <body>
@@ -260,13 +270,35 @@
 
                         <div class="product-info-section">
                             <h1 class="product-name">${productDetail.name}</h1>
+                            <%-- >>> BANNER THÔNG BÁO (Nằm ngay trên tên SP hoặc giá) <<< --%>
+                            <c:if test="${isSpecialDay}">
+                                <div style="background-color: #ffeeba; color: #856404; padding: 10px; border-radius: 5px; margin-bottom: 15px; font-size: 14px; border: 1px solid #ffeeba;">
+                                    <i class="fa-solid fa-gift"></i> <strong>HAPPY DAY: </strong> Giảm thêm ${sessionScope.cart.promotionPercent}%.
+                                </div>
+                            </c:if>
+
                             <div class="price-section">
-                                <%-- Hiển thị giá --%>
-                                <span class="sale-price"><fmt:formatNumber value="${productDetail.salePrice}" type="number" maxFractionDigits="0"/>đ</span>
-                                <span class="original-price"><fmt:formatNumber value="${productDetail.originalPrice}" type="number" maxFractionDigits="0"/>đ</span>
+                                <%-- Giá bán (Đã được giảm nếu là ngày KM) --%>
+                                <span class="sale-price" style="color: #dc3545; font-size: 28px; font-weight: bold;">
+                                    <fmt:formatNumber value="${productDetail.salePrice}" type="number" maxFractionDigits="0"/>đ
+                                </span>
+
+                                <%-- Nếu là ngày KM: Hiện giá gốc gạch ngang + Badge --%>
+                                <c:if test="${isSpecialDay}">
+                                    <span class="original-price" style="text-decoration: line-through; color: #888; font-size: 16px; margin-left: 10px;">
+                                        <fmt:formatNumber value="${productDetail.originalPrice}" type="number" maxFractionDigits="0"/>đ
+                                    </span>
+                                    
+                                </c:if>
+
+                                <%-- Nếu KHÔNG phải ngày KM nhưng vẫn có sale thường --%>
+                                <c:if test="${!isSpecialDay && productDetail.originalPrice > productDetail.salePrice}">
+                                    <span class="original-price" style="text-decoration: line-through; color: #888; font-size: 16px; margin-left: 10px;">
+                                        <fmt:formatNumber value="${productDetail.originalPrice}" type="number" maxFractionDigits="0"/>đ
+                                    </span>
+                                </c:if>
+
                                 <span class="sold-quantity">Đã bán: ${productDetail.soldQuantity}</span>
-                                <%-- Bỏ stockQuantity vì đã chuyển sang product_sizes --%>
-                                <%--<span class="stock-status">Còn hàng</span> --%>
                             </div>
 
                             <div class="size-selector">
@@ -301,12 +333,12 @@
 
                             <div class="social-share">
                                 <a href="https://www.facebook.com/trannamkhanh011204" target="_blank">
-                                <i class="fab fa-facebook-f"></i>
+                                    <i class="fab fa-facebook-f"></i>
                                 </a>
                                 <a href="#"><i class="fab fa-twitter"></i></a>
                                 <a href="#"><i class="fab fa-pinterest"></i></a>
                                 <a href="https://www.instagram.com/khanhtran655/" target="_blank">
-                                <i class="fab fa-instagram"></i>
+                                    <i class="fab fa-instagram"></i>
                                 </a>
                             </div>
                         </div>
@@ -321,34 +353,34 @@
                     </div>
                 </c:if>
             </div>
-                <%-- === BẮT ĐẦU PHẦN SẢN PHẨM LIÊN QUAN === --%>
-        <c:if test="${not empty relatedProducts}">
-            <div class="container" style="margin-top: 30px;"> <%-- Thêm container mới --%>
-                <div class="related-products-section">
-                    <h2>Có thể bạn cũng thích</h2>
-                    
-                    <div class="product-list">
-                        <%-- Lặp qua danh sách sản phẩm liên quan --%>
-                        <c:forEach items="${relatedProducts}" var="p">
-                            <div class="product-item">
-                                <a href="detail?pid=${p.id}">
-                                    <img src="${p.imageUrl}" alt="${p.name}">
-                                </a>
-                                <h3 class="product-name">${p.name}</h3>
-                                <div class="product-price">
-                                    <span class="sale-price"><fmt:formatNumber value="${p.salePrice}" type="number"/>đ</span>
-                                    <c:if test="${p.originalPrice > p.salePrice}">
-                                        <span class="original-price"><fmt:formatNumber value="${p.originalPrice}" type="number"/>đ</span>
-                                    </c:if>
+            <%-- === BẮT ĐẦU PHẦN SẢN PHẨM LIÊN QUAN === --%>
+            <c:if test="${not empty relatedProducts}">
+                <div class="container" style="margin-top: 30px;"> <%-- Thêm container mới --%>
+                    <div class="related-products-section">
+                        <h2>Có thể bạn cũng thích</h2>
+
+                        <div class="product-list">
+                            <%-- Lặp qua danh sách sản phẩm liên quan --%>
+                            <c:forEach items="${relatedProducts}" var="p">
+                                <div class="product-item">
+                                    <a href="detail?pid=${p.id}">
+                                        <img src="${p.imageUrl}" alt="${p.name}">
+                                    </a>
+                                    <h3 class="product-name">${p.name}</h3>
+                                    <div class="product-price">
+                                        <span class="sale-price"><fmt:formatNumber value="${p.salePrice}" type="number"/>đ</span>
+                                        <c:if test="${p.originalPrice > p.salePrice}">
+                                            <span class="original-price"><fmt:formatNumber value="${p.originalPrice}" type="number"/>đ</span>
+                                        </c:if>
+                                    </div>
                                 </div>
-                            </div>
-                        </c:forEach>
+                            </c:forEach>
+                        </div>
+
                     </div>
-                    
                 </div>
-            </div>
-        </c:if>
-        <%-- === KẾT THÚC PHẦN SẢN PHẨM LIÊN QUAN === --%>
+            </c:if>
+            <%-- === KẾT THÚC PHẦN SẢN PHẨM LIÊN QUAN === --%>
         </div>
 
         <jsp:include page="footer.jsp"/>

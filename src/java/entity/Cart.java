@@ -2,6 +2,7 @@ package entity;
 
 import java.util.HashMap;
 import java.util.Map;
+import service.PromotionService;
 
 public class Cart {
     // THAY ĐỔI TỪ Map<Integer, CartItem>
@@ -88,5 +89,13 @@ public class Cart {
         
         // Đảm bảo tổng tiền không bao giờ âm
         return Math.max(0, finalTotal); 
+    }
+    public boolean isPromotionActive() {
+        return PromotionService.isPromotionActive();
+    }
+    public int getPromotionPercent() {
+        // Lấy tỉ lệ từ Service (ví dụ 0.15) nhân với 100 để ra số nguyên (15)
+        double rate = service.PromotionService.getDiscountRate();
+        return (int) (rate * 100);
     }
 }

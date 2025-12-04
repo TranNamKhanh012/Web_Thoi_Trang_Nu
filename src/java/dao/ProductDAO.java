@@ -712,4 +712,47 @@ public int countOnSaleProducts(Integer categoryId, Double minPrice, Double maxPr
         }
         return list;
     }
+    /**
+     * Lấy danh sách sản phẩm còn tồn kho nhưng không bán được trong 30 ngày qua.
+     */
+    public List<Product> getSlowMovingProducts() {
+        List<Product> list = new ArrayList<>();
+        // Query: Lấy SP có tồn kho > 0 VÀ (ID không nằm trong danh sách đã bán 30 ngày qua)
+        String query = "SELECT p.*, IFNULL(SUM(ps.stock), 0) as total_stock "
+                     + "FROM products p "
+                     + "LEFT JOIN product_sizes ps ON p.id = ps.product_id "
+                     + "WHERE p.id NOT IN ( "
+                     + "    SELECT DISTINCT od.product_id "
+                     + "    FROM order_details od "
+                     + "    JOIN orders o ON od.order_id = o.id "
+                     + "    WHERE o.order_date >= DATE_SUB(NOW(), INTERVAL 30 DAY) "
+                     + ") "
+                     + "GROUP BY p.id "
+                     + "HAVING total_stock > 0 " // Chỉ lấy sản phẩm còn hàng
+                     + "ORDER BY total_stock DESC"; // Ưu tiên hiển thị hàng tồn nhiều nhất
+
+        try (Connection conn = DBContext.getConnection();
+             PreparedStatement ps = conn.prepareStatement(query);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                Product p = new Product();
+                p.setId(rs.getInt("id"));
+                p.setName(rs.getString("name"));
+                p.setImageUrl(rs.getString("image_url"));
+                p.setOriginalPrice(rs.getDouble("original_price"));
+                p.setSalePrice(rs.getDouble("sale_price"));
+                p.setCategoryId(rs.getInt("category_id"));
+                
+                // Tận dụng trường soldQuantity (hoặc tạo trường mới) để lưu tạm số lượng tồn kho cho báo cáo này
+                // Ở đây mình gán tạm vào soldQuantity để hiển thị ra JSP cho tiện
+                p.setSoldQuantity(rs.getInt("total_stock")); 
+                
+                list.add(p);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 }

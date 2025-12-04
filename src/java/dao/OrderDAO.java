@@ -313,6 +313,7 @@ public double calculateRevenueThisMonth() {
     }
     // ... (Các hàm calculateRevenue khác)
 
+    
     // --- THÊM HÀM NÀY ---
     public double calculateRevenueThisYear() {
         // Tính tổng tiền các đơn hàng hoàn thành trong năm hiện tại
@@ -329,4 +330,5 @@ public double calculateRevenueThisMonth() {
         } catch (Exception e) { e.printStackTrace(); }
         return 0.0;
     }
+    
 }

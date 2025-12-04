@@ -3,94 +3,105 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/admin/order_list.jsp</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/policy/payment-policy.jsp</file>
-            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/dao/ProductSizeDAO.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/entity/OrderDetail.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/ForgotPasswordController.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/dao/ProductDAO.java</file>
-            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/cart.jsp</file>
-            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/promotions.jsp</file>
-            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/LogoutController.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/detail.jsp</file>
-            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/index.html</file>
-            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/search.jsp</file>
-            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/AdminFeedbackController.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/ArticleDetailController.java</file>
-            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/ProfileController.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/entity/Cart.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/admin/user_form.jsp</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/AdminProductController.java</file>
-            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/ProductController.java</file>
-            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/contact.jsp</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/ContactController.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/register.jsp</file>
-            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/admin/product_list.jsp</file>
+            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/admin/inventory.jsp</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/PaymentSuccessController.java</file>
-            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/dao/ArticleDAO.java</file>
-            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/entity/User.java</file>
+            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/QrCheckController.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/footer.jsp</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/context/DBContext.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/entity/Product.java</file>
-            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/admin/category_list.jsp</file>
-            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/header.jsp</file>
+            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/login_qr.jsp</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/products.jsp</file>
-            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/dao/CartDAO.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/admin/order_detail.jsp</file>
+            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/QrPageController.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/entity/ProductSize.java</file>
-            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/admin/product_form.jsp</file>
-            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/article-detail.jsp</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/dao/FeedbackDAO.java</file>
-            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/vnpay_return.jsp</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/policy/return-policy.jsp</file>
-            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/login.jsp</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/admin/user_list.jsp</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/admin/article_form.jsp</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/checkout.jsp</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/OrderHistoryController.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/context/VNPayConfig.java</file>
-            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/CheckoutController.java</file>
+            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/QrConfirmController.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/LoginController.java</file>
-            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/AdminArticleController.java</file>
-            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/order-history.jsp</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/dao/UserDAO.java</file>
-            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/AddToCartController.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/DetailController.java</file>
-            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/NewsController.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/reset-password.jsp</file>
+            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/admin/settings.jsp</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/profile.jsp</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/policy/shipping-policy.jsp</file>
-            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/admin/admin_dashboard.jsp</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/admin/feedback_list.jsp</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/CartController.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/dao/CategoryDAO.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/css/style.css</file>
-            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/ConfirmOrderController.java</file>
-            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/AboutController.java</file>
+            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/AdminInventoryController.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/AdminCategoryController.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/HomeController.java</file>
-            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/AdminUserController.java</file>
-            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/forgot-password.jsp</file>
+            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/dao/QrDAO.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/InvoiceController.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/PolicyController.java</file>
+            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/VNPayIPNController.java</file>
+            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/entity/Category.java</file>
+            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/admin/article_list.jsp</file>
+            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/RegisterController.java</file>
+            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/about.jsp</file>
+            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/css/admin_style.css</file>
+            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/admin/order_list.jsp</file>
+            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/dao/ProductSizeDAO.java</file>
+            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/cart.jsp</file>
+            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/promotions.jsp</file>
+            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/LogoutController.java</file>
+            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/index.html</file>
+            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/search.jsp</file>
+            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/AdminFeedbackController.java</file>
+            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/ProfileController.java</file>
+            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/dao/SettingDAO.java</file>
+            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/ProductController.java</file>
+            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/contact.jsp</file>
+            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/admin/product_list.jsp</file>
+            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/dao/ArticleDAO.java</file>
+            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/entity/User.java</file>
+            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/admin/category_list.jsp</file>
+            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/header.jsp</file>
+            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/dao/CartDAO.java</file>
+            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/admin/product_form.jsp</file>
+            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/article-detail.jsp</file>
+            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/vnpay_return.jsp</file>
+            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/login.jsp</file>
+            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/CheckoutController.java</file>
+            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/AdminArticleController.java</file>
+            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/order-history.jsp</file>
+            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/AddToCartController.java</file>
+            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/NewsController.java</file>
+            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/AdminSettingController.java</file>
+            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/admin/admin_dashboard.jsp</file>
+            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/ConfirmOrderController.java</file>
+            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/AboutController.java</file>
+            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/AdminUserController.java</file>
+            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/forgot-password.jsp</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/AdminOrderController.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/entity/Article.java</file>
-            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/VNPayIPNController.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/entity/CartItem.java</file>
-            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/entity/Category.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/entity/Order.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/home.jsp</file>
-            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/admin/article_list.jsp</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/SearchController.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/payment.jsp</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/AdminDashboardController.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/dao/OrderDAO.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/PromotionController.java</file>
+            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/service/PromotionService.java</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/policy/partner-policy.jsp</file>
-            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/controller/RegisterController.java</file>
-            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/about.jsp</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/news.jsp</file>
-            <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/web/css/admin_style.css</file>
             <file>file:/D:/NetBeansProjects/Web_BanThoiTrangNu/src/java/entity/Feedback.java</file>
         </group>
     </open-files>

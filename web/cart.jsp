@@ -30,6 +30,18 @@
         .summary-row { display: flex; justify-content: space-between; margin-bottom: 15px; }
         .summary-total { font-weight: bold; color: #dc3545; }
         .btn-checkout { display: block; width: 100%; background: #ffc107; color: #212529; padding: 15px; text-align: center; font-weight: bold; border-radius: 5px; margin-top: 20px; }
+        
+        /* CSS MỚI CHO TAG GIẢM GIÁ */
+        .discount-badge {
+            background-color: #dc3545;
+            color: white;
+            font-size: 11px;
+            font-weight: bold;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: 5px;
+            vertical-align: middle;
+        }
     </style>
 </head>
 <body>
@@ -46,6 +58,17 @@
                 <c:otherwise>
                     <div class="cart-page-wrapper">
                         <div class="cart-details">
+                            <%-- >>> BANNER THÔNG BÁO GIẢM GIÁ CUỐI TUẦN <<< --%>
+                            <c:if test="${sessionScope.cart.promotionActive}">
+                                <div style="background-color: #d4edda; color: #155724; padding: 15px; margin-bottom: 20px; border-radius: 5px; border: 1px solid #c3e6cb; display: flex; align-items: center;">
+                                    <i class="fa-solid fa-gift" style="font-size: 24px; margin-right: 15px;"></i>
+                                    <div>
+                                        <strong>HAPPY DAY!</strong><br>
+                                        Đơn hàng của bạn đang được <b>GIẢM THÊM ${sessionScope.cart.promotionPercent}%</b> (Đã áp dụng vào giá sản phẩm). Chúc bạn cuối tuần vui vẻ!
+                                    </div>
+                                </div>
+                            </c:if>
+                            
                             <form action="cart" method="POST">
                                 <table class="cart-table">
                                     <thead>
@@ -53,7 +76,7 @@
                                             <th colspan="2">Sản phẩm</th>
                                             <th>Giá</th>
                                             <th>Số lượng</th>
-                                            <th>Tạm tính</th>
+                                            <th>Thành tiền</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -75,13 +98,35 @@
                                                         </div>
                                                     </div>
                                                 </td>
-                                                <td><fmt:formatNumber value="${item.product.salePrice}" type="number"/>đ</td>
+                                                
+                                                <%-- CỘT GIÁ (ĐÃ CẬP NHẬT HIỂN THỊ GIẢM GIÁ) --%>
+                                                <td class="product-price">
+                                                    <%-- Nếu là cuối tuần, hiển thị giá gốc và tag giảm giá --%>
+                                                    <c:if test="${sessionScope.cart.promotionActive}">
+                                                        <div style="margin-bottom: 4px;">
+                                                            <span style="text-decoration: line-through; color: #999; font-size: 13px;">
+                                                                <fmt:formatNumber value="${item.product.salePrice}" type="number"/>đ
+                                                            </span>
+                                                            <span class="discount-badge">-10%</span>
+                                                        </div>
+                                                    </c:if>
+                                                    
+                                                    <%-- Giá thực tế (đã giảm hoặc giữ nguyên) --%>
+                                                    <span style="color: #dc3545; font-weight: bold; font-size: 16px;">
+                                                        <fmt:formatNumber value="${item.effectivePrice}" type="number"/>đ
+                                                    </span>
+                                                </td>
+
                                                 <td>
                                                     <div class="quantity-selector">
                                                         <input type="number" name="quantity" value="${item.quantity}" min="1" style="width: 60px; text-align: center; padding: 5px; border: 1px solid #ccc;">
                                                     </div>
                                                 </td>
-                                                <td style="color: #dc3545; font-weight: bold;"><fmt:formatNumber value="${item.totalPrice}" type="number"/>đ</td>
+                                                
+                                                <%-- THÀNH TIỀN (Giá thực tế x Số lượng) --%>
+                                                <td style="color: #dc3545; font-weight: bold;">
+                                                    <fmt:formatNumber value="${item.totalPrice}" type="number"/>đ
+                                                </td>
                                             </tr>
                                         </c:forEach>
                                     </tbody>
@@ -93,16 +138,29 @@
                             </form>
                         </div>
                         
+                        <%-- PHẦN TỔNG KẾT HÓA ĐƠN --%>
                         <div class="cart-summary">
                             <div class="cart-summary-box">
                                 <h3 class="summary-title">TỔNG CỘNG GIỎ HÀNG</h3>
+                                
+                                <%-- Hiển thị thông tin giảm giá --%>
+                                <c:if test="${sessionScope.cart.promotionActive}">
+                                    <div class="summary-row" style="color: #28a745; font-size: 13px; font-style: italic;">
+                                        <span>*Đã áp dụng ưu đãi cuối tuần</span>
+                                    </div>
+                                </c:if>
+
                                 <div class="summary-row">
                                     <span>Tạm tính</span>
+                                    <%-- totalMoney trong Cart đã được tính dựa trên giá sau giảm --%>
                                     <span class="summary-total"><fmt:formatNumber value="${sessionScope.cart.totalMoney}" type="number"/>đ</span>
                                 </div>
-                                <div class="summary-row">
-                                    <span>Tổng</span>
-                                    <span class="summary-total"><fmt:formatNumber value="${sessionScope.cart.totalMoney}" type="number"/>đ</span>
+                                
+                                <div class="summary-row" style="border-top: 1px solid #eee; padding-top: 15px; margin-top: 10px;">
+                                    <span style="font-size: 16px; font-weight: bold;">Tổng thanh toán</span>
+                                    <span class="summary-total" style="font-size: 18px;">
+                                        <fmt:formatNumber value="${sessionScope.cart.totalMoney}" type="number"/>đ
+                                    </span>
                                 </div>
                                 <a href="checkout" class="btn-checkout">TIẾN HÀNH THANH TOÁN</a>
                             </div>
